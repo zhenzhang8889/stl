@@ -1,0 +1,21 @@
+.container
+  #feed
+    = render 'shared/feed/tabs'
+    = render 'shared/feed/filter'
+    #feed_contents
+      %ol#feed_list.container
+        - unless @posts.nil?
+          - @posts.each do |item|
+            = render "shared/feed/post_view", post: item.feedable, feed: item
+            
+        - unless @exercises.nil?
+          - @exercises.each do |item|
+            = render "shared/feed/status_view", status: item.feedable, feed: item
+            
+        - unless @workouts.nil?
+          - @workouts.each do |item|
+            = render "shared/feed/workout_view", workout: item.feedable, feed: item
+            
+      / end #feed_list.container
+  / end #feed
+/ end .container

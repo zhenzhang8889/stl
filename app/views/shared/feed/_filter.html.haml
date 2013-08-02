@@ -1,0 +1,253 @@
+#tab_content_filter
+  .tab-filter
+    - for_users_edit do
+      %ul.nav.nav-pills
+        %li
+          %a{:href => "#"} 
+        %li
+          %a{:href => "#"} 
+        %li
+          %a{:href => "#"} 
+        %li
+          %a{:href => "#"} 
+    - if on_path?("feeds", "discover") || on_path?("feeds", "recommended") || on_path?("feeds", "popular") || on_path?("feeds", "featured")
+      %ul.nav.nav-pills
+        %li.pills-text
+          Filter Activity
+
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Content Type
+            %b.caret
+          %ul.dropdown-menu.fuck
+            %li
+              = link_to "#", data: { content: :workout, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Workout
+            %li.divider
+            %li
+              = link_to "#", data: { content: :post, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Post
+            %li.divider
+            %li
+              = link_to "#", data: { content: :status, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Status
+
+            = form_for :feed_filter, url:"/feeds/filter_discover", method: :get, remote: true do |f|
+              = f.hidden_field :content, value: "", id: "activity_content"
+              = f.hidden_field :type, value: type
+        %li.pull-right
+          .btn-group
+            %a.btn.btn-inverse.active{:href => "#"}
+              %i.icon-table
+              Cards
+            %a.btn.btn-inverse{:href => "#"}
+              %i.icon-list
+              List
+
+    - unless controller.controller_name == "stacks" || on_path?("users", "settings") || on_path?("registrations", "update") || on_path?("feeds", "discover") || on_path?("feeds", "recommended") || on_path?("feeds", "popular") || on_path?("feeds", "featured") 
+      %ul.nav.nav-pills
+        %li.pills-text
+          Filter Activity
+        / %li.dropdown
+        /   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        /     Week
+        /     %b.caret
+        /   %ul.dropdown-menu
+        /     %li
+        /       %a.multicheck.checked{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck.checked{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+
+        %li.dropdown
+          %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+            Content Type
+            %b.caret
+          %ul.dropdown-menu.fuck
+            %li
+              = link_to "#", data: { content: :workout, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Workout
+            %li.divider
+            %li
+              = link_to "#", data: { content: :post, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Post
+            %li.divider
+            %li
+              = link_to "#", data: { content: :status, sort: true }, class: "multicheck checked" do
+                %i.icon-ok
+                Status
+
+            = form_for :feed_filter, url:"/feeds/filter_activity", method: :get, remote: true do |f|
+              = f.hidden_field :content, value: "", id: "activity_content"
+              - if on_path?("users", "show")
+                = f.hidden_field :type, value: :profile
+              - elsif on_path?("feeds", "tags")
+                = f.hidden_field :type, value: :tags
+                = f.hidden_field :tag, value: params[:tag]
+              - elsif on_path?("search", "index")
+                = f.hidden_field :type, value: :search
+                = f.hidden_field :search, value: params[:search_keyword]
+              - else
+                = f.hidden_field :type, value: :feed
+            / %li.divider
+            / %li
+            /   %a.multicheck{:href => "#"}
+            /     %i.icon-ok
+            /     Lorem ipsum
+        / %li.dropdown
+        /   %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+        /     Categories
+        /     %b.caret
+        /   %ul.dropdown-menu
+        /     %li
+        /       %a.multicheck.checked{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck.checked{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        /     %li.divider
+        /     %li
+        /       %a.multicheck{:href => "#"}
+        /         %i.icon-ok
+        /         Lorem ipsum
+        %li.pull-right
+          .btn-group
+            %a.btn.btn-inverse.active{:href => "#"}
+              %i.icon-table
+              Cards
+            %a.btn.btn-inverse{:href => "#"}
+              %i.icon-list
+              List
+
+    - for_stacks_show do
+      #user_feed_filter_my_stacks
+        %ul.nav.nav-pills
+          %li
+            %a{:href => "#"} 
+          %li
+            %a{:href => "#"} 
+          %li
+            %a{:href => "#"} 
+          %li
+            %a{:href => "#"} 
+        / end .nav.nav-pills
+      / end #user_feed_filter_my_stacks
+    - for_stacks_index do
+      #user_feed_filter_my_stacks
+        %ul.nav.nav-pills
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Week
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Content Type
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Categories
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck.checked{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+              %li.divider
+              %li
+                %a.multicheck{:href => "#"}
+                  %i.icon-ok
+                  Lorem ipsum
+          %li.pull-right
+            .btn-group
+              %a.btn.btn-inverse.active{:href => "#"}
+                %i.icon-table
+                Cards
+              %a.btn.btn-inverse{:href => "#"}
+                %i.icon-list
+                List
+
+        / end .nav.nav-pills
+      / end #user_feed_filter_my_stacks
+
+
+
+
+    
+      

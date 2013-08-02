@@ -1,0 +1,44 @@
+%li.item.span4
+  %section.box.workout
+    - if workout.user == current_user
+      .options.pull-right{style: "display:none;"}
+        = link_to edit_workout_path(workout) do
+          %i.icon-edit
+        = link_to workout, method: :delete, confirm: "are you sure?" do
+          %i.icon-trash
+    %header
+      .avatar
+        = link_to workout.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => workout.user.name}} do
+          = profile_image_for(workout.user, 34)
+      / end .avatar
+      - if signed_in?
+        = link_to workout.user.name, workout.user
+      - else 
+        = workout.user.name
+      .timestamp
+        = time_ago_in_words(workout.created_at)
+      / end .timestamp
+    %h1= link_to workout.name, workout
+    .media
+      - if workout.has_videos?
+        - workout.videos.each do |v|
+          = render "shared/video_display", v: v, h: 200, w: 325
+        %br
+      - if workout.has_images?
+        - workout.images.each do |i|
+          = render "shared/image_display", i: i
+    / end .media
+    = simple_format h truncate(workout.description, length: 260)
+    - if workout.tags.present?
+      - workout.tags.map(&:name).map do |t|
+        = link_to tags_feeds_path(tag: t), class: 'tag' do
+          %i.icon-tag
+          = t
+      / end .tags
+    %footer
+      = render '/shared/feed/social_stats', feed: feed, content: workout
+      = render '/shared/feed/social_actions', feed: feed, content: workout
+
+    / workout comments
+    = render '/shared/feed/comments_for_feed_item', feed: feed, content: workout
+  / end .box.workout

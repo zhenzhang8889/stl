@@ -1,0 +1,10 @@
+$("#saveFade").hide();
+$("#saveFade p#link-loading").hide();
+$("#add_errors").show();
+<% if blank == true %>
+	$("#add_errors ul").append("<li>Please select a stack.</li>");
+<% else %>
+	<% @already.each do |e| %>
+		$("#add_errors ul").append("<li><%= @content.type_name %> already saved to <%= e %>. Remove it to continue.</li>");
+	<% end %>
+<% end %>

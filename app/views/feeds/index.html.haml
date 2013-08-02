@@ -1,0 +1,10 @@
+= render template: "statuses/new"
+.container
+  #feed
+    = render 'shared/feed/tabs'
+    = render 'shared/feed/filter', :locals => { :user => @user}
+    #feed_contents
+      = render "feed_results", items: @feed_items   
+    / end #feed_list.container
+  / end #feed
+/ end .container

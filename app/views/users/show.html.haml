@@ -1,0 +1,73 @@
+
+.wrapper.narrow
+  .container
+    .row
+      .span12
+        %ul.breadcrumb
+
+        / end .breadcrumb
+      / .span12
+    / end .row
+    %section#user_stats
+      .row
+        .span8
+          / %a.avatar{:href => "#"}
+          /   %img{:src => "http://placehold.it/120x120"}
+          %a{ :href => user_path(@user), :class => "avatar" }
+            = profile_image_for @user, 120
+          %header
+            %h1= @user.name
+            %p
+              = @user.location
+              %br
+              - unless @user.tagline.blank?
+                .user-tagline= @user.tagline
+            - if signed_in?
+              - unless current_user == @user
+                #follow_form
+                  %span{class: "follow_link_#{@user.id}"}
+                    = link_to_follow_unfollow(@user, style: "btn btn-inverse")
+
+                = link_to "Compliment", compliment_modal_compliments_path(user_id: @user.id), remote: true, data: { target: "#complimentModal", toggle: "modal" }, class: "btn btn-small btn-warning"
+                
+                = link_to  '#', data: { target: "#message_in_modal", toggle: "modal" }, class: "btn btn-small btn-inverse" do
+                  %i.icon-comment
+                    Messages
+          %footer
+            %ul
+              %li
+                %a{:href => "#"}
+                  Posts
+                  %strong= @user.posts.all.size
+              %li
+                %a{:href => "#"}
+                  Workouts
+                  %strong= @user.workouts.all.size
+              %li
+                %a{:href => "#"}
+                  Followers
+                  %strong= @user.followers.all.size
+              %li
+                %a{:href => "#"}
+                  Following
+                  %strong= @user.followed_users.all.size
+              %li
+                %a{:href => compliments_user_path(@user)}
+                  Compliments
+                  %strong= @user.compliments_count
+        / end .span6
+      / end .row
+    / end #user_stats
+  / end .container
+/ end .wrapper.narrow
+.container
+  #feed
+    = render 'shared/feed/tabs'
+    #tab-content
+      = render template: "users/posts"    
+    / end #tab-content
+  / end #feed
+/ end .container
+
+
+= render "shared/modals/message"

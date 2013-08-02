@@ -1,0 +1,201 @@
+/* --------------------------------------------------------------
+  Forms
+-------------------------------------------------------------- */
+
+/* Alerts
+-------------------------------------------------------------- */
+.alert {
+  margin: $gridGutterWidth 0;
+}
+
+/* Fitness goals search
+-------------------------------------------------------------- */
+#fitness_goals_search {
+  position: relative;
+  background: $black;
+  margin: -40px 0 70px 0;
+  padding: 25px;
+
+  input[type="text"] {
+    display: block;
+    width: 100%;
+    @include box-sizing(border-box);
+    margin: 0;
+    padding-left: 450px;
+    height: 55px;
+  }
+
+  .btn {
+    position: absolute;
+    top: 40px;
+    right: 40px;
+  }
+
+  h1 {
+    position: absolute;
+    top: 20px;
+    left: 100px;
+    font-size: 30px;
+    font-weight: normal;
+    color: $orange;
+  }
+
+  .icon-search {
+    position: absolute;
+    top: 35px;
+    left: 40px;
+  }
+}
+
+/* Statuses
+-------------------------------------------------------------- */
+#status {
+  .actions {
+    margin: 15px 0 0 0;
+    color: $grayLight;
+
+    a {
+      display: inline-block;
+      margin: 0 5px;
+      color: $gray;
+
+      &:hover {
+        color: $orange;
+      }
+    }
+  }
+}
+
+#status_form {
+  .links {
+    color: $grayLight;
+    line-height: 36px;
+
+    a {
+      display: inline-block;
+      margin: 0 5px;
+    }
+  }
+
+  .social {
+    a {
+      $size: 32px;
+      width: $size;
+      height: $size;
+
+      @include background-size($size);
+    }
+  }
+
+  #upload_fields, .hiddenPanda {
+    // display: none;
+    left:-10000px; 
+    top:auto; 
+    width:1px; 
+    height:1px; 
+    overflow:hidden;
+  }
+
+  #external_link_content {
+    height: "200px";
+    width:auto;
+    display: none;
+  }
+
+  #url_image_choices {
+    width: 100px;
+    height: 120px;
+    overflow:hidden;
+    margin:7px;
+  }
+
+  #atc_total_image_nav {
+    float: left;
+    padding-left: 20px;
+  }
+
+  #atc_total_images_info {
+    float: left;
+    padding: 4px 10px;
+    font-size:12px;
+  }
+}
+
+/* Comment form
+-------------------------------------------------------------- */
+.comment_form {
+  margin: 0 -20px -20px -20px;
+  width: 100%;
+  padding: 0 20px 0 20px;
+  background: $grayLighter;
+  float: left;
+  color: $textColor !important;
+
+  li {
+    @include box-sizing(border-box);
+
+    position: relative;
+    margin: 0;
+    padding: 5px 10px 10px 44px;
+    list-style: none;
+    display: block;
+    width: 100%;
+    float: left;
+
+    .user_avatar {
+      position: absolute;
+      top: 10px;
+      left: 0;
+    }
+
+    form {
+      margin: 5px 0 0 0;
+      width: 100%;
+      display: block;
+
+      textarea {
+        width: 100% !important;
+      }
+    }
+  }
+}
+
+#comment_form {
+  padding: $gridGutterWidth;
+  background: $grayLighter;
+  overflow: hidden;
+  
+  .social {
+    a {
+      $size: 32px;
+      width: $size;
+      height: $size;
+
+      @include background-size($size);
+    }
+  }
+}
+
+/* Dropzone
+-------------------------------------------------------------- */
+.dropzone {
+  border: dashed 1px $grayLight;
+  background: darken($grayLighter, 5%);
+  padding: 20px;
+  line-height: 50px;
+  text-align: center;
+}
+
+/* Tags edit
+-------------------------------------------------------------- */
+.tags_edit {
+  padding: 10px;
+  background: $white;
+  border: solid 1px $inputBorder;
+}
+
+/* Users new
+-------------------------------------------------------------- */
+#new_user .control-group {
+  margin-bottom: 0 !important;
+}

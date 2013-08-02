@@ -1,0 +1,5 @@
+<% if @user.errors.present? %>
+	$('#user_first_step').html("<%= escape_javascript render(:template => 'devise/registrations/new', :formats => [:html]) %>");
+<% else %>
+	window.location.replace("/after_signup");
+<% end %>

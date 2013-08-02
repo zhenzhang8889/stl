@@ -1,0 +1,40 @@
+#tag_content
+  #tag_content_left
+  .row-fluid
+    #articles.span4
+      %b
+        Articles 
+      %span.label.label-warning
+        #{@articles.size}
+      %br/
+      - @articles_result[0..3].each do |art|
+        = art.name
+        %br/
+        
+      - if @articles.size > 3
+        =link_to "+#{@articles.size - 4} MORE","/users/sign_up"
+    #exercies.span4
+      %b
+        Exercies 
+      %span.label.label-warning
+        #{@exercises.size}
+      %br/
+      - @exercises[0..3].each do |exc|
+        = exc.name
+        %br/
+      - if @exercises.size > 3
+        =link_to "+#{@exercises.size - 4} MORE","/users/sign_up"
+    #workouts.span4
+      %b
+        Workouts 
+      %span.label.label-warning
+        #{@workouts.size}
+      %br/
+      - @workouts[0..3].each do |wko|
+        = wko.name
+        %br/
+      - if @workouts.size > 3
+        =link_to "+#{@workouts.size - 4} MORE","/users/sign_up"
+
+
+  #tag_content_right

@@ -1,0 +1,4 @@
+$('#tab-content').html("<%= escape_javascript render(:partial  => 'sent_recipient', :formats => [:html]) %>");
+$("#msg_success_in_modal").modal('show');          
+setTimeout($("#msg_success_in_modal").modal('hide'), 2000);          
+          

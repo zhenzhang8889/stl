@@ -1,0 +1,8 @@
+= render "shared/feed/filter"
+/ %ol#feed_list.container
+/   - @feed_items.each do |item|
+/     = render_feed_item_for(item)        
+/ / end #feed_list.container
+
+%ol#feed_list.container
+  = render @following, as: :stack

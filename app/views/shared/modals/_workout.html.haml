@@ -1,0 +1,37 @@
+/ - provide(:title, "Add Workout")
+/ %h1 Add Workout
+/ .row
+/   .span12.offset2
+/     = simple_form_for(@workout, :html => {:multipart => true}) do |f|
+/       = render 'shared/error_messages', object: f.object
+/       = f.input :name
+
+/       = f.simple_fields_for :images, @workout.images.build do |image_fields|
+/         = image_fields.label "Upload Photo"
+/         = image_fields.file_field :item
+
+/       = simple_fields_for(@workout.videos.build) do |builder|
+/         = render "shared/upload_video", object: "workout", builder: builder
+        
+/       = f.input :description
+/       = f.input :tag_list
+/       %h4 Add Your Exercises
+/       = f.simple_fields_for :exercises do |exercise_form|
+/         = render "exercise_fields", f: exercise_form
+/         %section.clearfix
+/       = link_to_add_fields("Add Exercise", f, :exercises)
+
+/       = f.submit "Save changes", class: "btn btn-large btn-primary", id: "workout_submit"
+
+
+
+
+
+#workout_new_modal
+  .container-fluid#workout_form
+    - @workout = Workout.new
+    = render 'workouts/form'
+    
+  / end .container-fluid
+/ end #workout_new_modal
+

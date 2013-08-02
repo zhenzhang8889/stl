@@ -1,0 +1,1 @@
+$('#tab-content').html("<%= escape_javascript render(:file => 'users/network_following', :formats => [:html]) %>");

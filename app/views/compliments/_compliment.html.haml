@@ -1,0 +1,16 @@
+.notify_menu
+  %ul.notification.unstyled
+    %li
+      .user
+        .avatar
+          = link_to compliment.motivator.name, {:rel => "tooltip", :data => { :placement => "left", :original_title => compliment.motivator.name}} do
+            = profile_image_for(compliment.motivator, 34)
+        / end .avatar
+        = link_to compliment.motivator.name, compliment.motivator
+      .notification
+        %p
+          %b= compliment.message
+        .timestamp
+          = time_ago_in_words(compliment.created_at)
+          ago
+        / end .timestamp

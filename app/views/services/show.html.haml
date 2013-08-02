@@ -1,0 +1,182 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+
+  .row
+    .span12
+      .page-header
+        %h1= @service.name
+        %p.muted            
+          = created_service(@service.created_at)      
+      / end .page-header
+    / end .span12
+  / end .row  
+      
+  .row
+    .span8
+      .service_media
+        / %iframe{ :src => "http://www.youtube.com/embed/2rKvoLu5Isk", :frameborder => "0", :allowfullscreen => "true" }
+        - if @service.has_videos?
+          - @service.videos.each do |v|
+            = render "shared/video_display", v: v, h: 450, w: 770
+
+        - if @service.has_images?
+          %center= image_tag @service.images.first.item.url(:show, false)
+        - else   
+          = image_tag('background.png') 
+      / .servuce_media
+      
+      .service_info
+        .price       
+          = dollar_price(@service.price)
+        .register
+          %a.btn.btn-default{:href => "#", "data-toggle" => "modal", "data-target" => "" } Register Now
+          
+        .spots
+          = spot_left(@service.spots)
+          
+        .expiration
+          = remaining(@service.expiration_date)
+      .clearx
+      
+      .description
+        %section.box.blog_post.single
+          .page-header
+            = simple_format h @service.description
+          %p
+            - @service.tags.map(&:name).map do |t|
+              = link_to tags_feeds_path(tag: t), class: 'tag' do
+                %i.icon-tag
+                = t
+    .span4
+      .box.related.services
+        .row-fluid   
+          .provider                  
+            = link_to @service.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => @service.user.name}} do
+              = profile_image_for(@service.user, 34)
+            .name                   
+              %h1
+                = @service.user.name
+                    
+          .follow     
+            - if signed_in?
+              #follow_form
+                %span{class: "follow_link_#{@service.user.id}"}
+                  = link_to_follow_unfollow(@service.user, button: "")   
+         
+        .row-fluid
+          = render "followers_posts"
+        .row-fluid
+          .experience
+            .title
+              Experience
+            .body
+              = @service.user.bio
+                  
+    .span4      
+      .box.related.bottom
+        %ul.related_content_list
+          - unless @service.related_content.present?
+            %li
+              %article
+                .content
+                  %h1 No related Content
+          - else
+            - @service.related_content.limit(3).each do |r|
+              %li
+                %article
+                  .content
+                    %h1
+                      = link_to r.name, r
+                    %p.leading= simple_format h truncate(r.body, length: 140)
+                    %p= r.user.name
+                    %p= r.created_at.strftime("%e %b %Y")
+
+
+                  / end .content                        
+  %br
+  .row    
+    .span8
+      .row-fluid   
+        .span6
+          .comment_like
+            = likes_count_helper(@service)
+            %a{:href => "#"}
+              %i.icon-comment
+              = pluralize(@service.comments_count, "comment")
+        .span6  
+          .row-fluid    
+            .span6           
+              %ul.nav.nav-pills.offset2        
+                %li.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    Add Video to Shelf...
+                    %b.caret
+                %ul.dropdown-menu.fuck         
+                  %li
+                    Workout
+                  %li.divider
+            .span6
+              - if signed_in?
+                .btn-toolbar.pull-right            
+                  .btn-group
+                    %span{class: "like_service_#{@service.id}"}
+                      = link_to_like_service_show(@service)
+            
+                    = link_to send("share_modal_#{@service.type_name.downcase.pluralize}_path", c_id: @service, c_type: @service.type_name), remote: true, data: { target: "#shareStackModal", toggle: "modal" }, class: "btn" do
+                      %i.icon-share
+                      Share
+                / end .btn-toolbar.pull-right
+      %hr      
+      %section#comments
+        %h1 
+          Comments
+          %span.comments_count (#{@service.comments_count})
+        - if signed_in?
+          = form_for current_user.comments.build, remote: true, html: { id: "comment_form"} do |c|
+            = c.text_area :content, placeholder: "Type Something Here", rows: 2, class: "span6"
+            = c.hidden_field :commentable_id, value: @service.id
+            = c.hidden_field :commentable_type, value: 'Service'
+            = c.submit "Post a comment", class: "btn btn-inverse btn-large pull-right"
+            %p.social.pull-left
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+          / end #comment_form
+        .row    
+          .span8
+            .sort            
+              %ul.nav.nav-pills
+                %li.pills-text
+                  .label_for_sort
+                    Sort       
+                %li.dropdown
+                  %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+                    Type
+                    %b.caret
+                  %ul.dropdown-menu
+                    %li
+                      = link_to "#", data: { content: :workout, sort: true } do                        
+                        Most Recent First
+                    %li.divider
+                    %li
+                      = link_to "#", data: { content: :post, sort: true } do                        
+                        Most Recent First
+                    %li.divider
+                    %li
+                      = link_to "#", data: { content: :status, sort: true } do                        
+                        Most Recent First
+                      
+        %ul.comment_list{class: "cl_#{@service.feeds.first.id}"}
+          = render @comments
+        / end .comments_list
+      
+        = link_to "#", class: "btn btn-inverse btn-large", id: "more_post_comments" do
+          %i.icon-plus
+          More
+        = will_paginate @comments, id: "post_show_pagination", style: "display:none"
+      / end #comments
+    / end .span8
+    
+    

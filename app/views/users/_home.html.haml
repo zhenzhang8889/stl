@@ -1,0 +1,457 @@
+= render 'shared/status_form'
+.container
+  #feed
+    .navbar.navbar-inverse
+      .navbar-inner
+        %ul.nav
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              %i.icon-list-ul
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  My Content
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Network content
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  My groups
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Featured content
+          %li.navbar-text
+            Activity feed
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Timeline
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Since last login
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  This week
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  This month
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  This year
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Content type
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Status updates
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Videos
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Photos
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Articles
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Blog post
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Discussions
+          %li.dropdown
+            %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#"}
+              Categories
+              %b.caret
+            %ul.dropdown-menu
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Building muscle
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  How to
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Exercises
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  General health
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  Loosing weight
+              %li.divider
+              %li
+                %a{:href => "#"}
+                  %i.icon-ok
+                  compliment
+        %form.navbar-search.pull-right{:action => ""}
+          %input.search-query.span3{:placeholder => "Search", :type => "text"}
+    / end .row
+    .row
+      .span6
+        %section.box.status
+          %h1
+            %a{ :href => "#" } I need to take control of my health!
+          %p.author
+            %strong Ed Hardy,
+            Chicago, IL
+          .media
+            %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :preload => "auto",}
+              %source{:src => "http://video-js.zencoder.com/oceans-clip.mp4", :type => "video/mp4"}/
+              %source{:src => "http://video-js.zencoder.com/oceans-clip.webm", :type => "video/webm"}/
+              %source{:src => "http://video-js.zencoder.com/oceans-clip.ogv", :type => "video/ogg"}/
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+          .box_controls
+            %a
+              %i.icon-heart
+              Like
+            %a
+              %i.icon-comment
+              Comment
+          %ul.comment_list
+            %li.comment
+              .user_avatar
+                %a{:href => "#"}
+                  %img{:alt => "", :src => "http://placehold.it/57x57"}/
+              .comment_body
+                %a{:href => "#", :title => "User name"} User name
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidunt laudantium dicta sit consequatur voluptatum. Temporibus.
+                .time_stamp 2 hours ago
+                %a.like{:href => "#"}
+                  %i.icon-heart
+                  Like
+            / // end .comment
+            %li.comment
+              .user_avatar
+                %a{:href => "#"}
+                  %img{:alt => "", :src => "http://placehold.it/57x57"}/
+              .comment_body
+                %a{:href => "#", :title => "User name"} User name
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidunt laudantium dicta sit consequatur voluptatum. Temporibus.
+                .time_stamp 2 hours ago
+                %a.like{:href => "#"}
+                  %i.icon-heart
+                  Like
+            / // end .comment
+            %li.comment
+              .user_avatar
+                %a{:href => "#"}
+                  %img{:alt => "", :src => "http://placehold.it/57x57"}/
+              .comment_body
+                %a{:href => "#", :title => "User name"} User name
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidunt laudantium dicta sit consequatur voluptatum. Temporibus.
+                .time_stamp 2 hours ago
+                %a.like{:href => "#"}
+                  %i.icon-heart
+                  Like
+            / // end .comment
+            %li.comment
+              .user_avatar
+                %a{:href => "#"}
+                  %img{:alt => "", :src => "http://placehold.it/57x57"}/
+              .comment_body
+                %form
+                  %textarea{ :placeholder => "Add a comment"}
+            / // end .comment
+          / end .comment_list
+        / end .box.discussion
+        .row
+          .span3
+            %section.box.blog_post
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              .media
+                %img{:alt => "", :src => "http://placehold.it/250x250"}/
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.blog_post
+          / end .span6
+          .span3
+            %section.box.discussion
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              .media
+                %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :preload => "auto",}
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.mp4", :type => "video/mp4"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.webm", :type => "video/webm"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.ogv", :type => "video/ogg"}/
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos qofficiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidlaudantium dicta sit consequatur voluptatum. Temporibus.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.discussion
+          / end .span6
+        / end .row
+      / end .span6
+      .span6
+        .row
+          .span3
+            %section.box.discussion
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos qofficiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidlaudantium dicta sit consequatur voluptatum. Temporibus.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.discussion
+            %section.box.workout
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              .media
+                %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :preload => "auto",}
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.mp4", :type => "video/mp4"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.webm", :type => "video/webm"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.ogv", :type => "video/ogg"}/
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos qofficiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidlaudantium dicta sit consequatur voluptatum. Temporibus.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.workout
+          / end .span3
+          .span3
+            %section.box.discussion
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              .media
+                %img{:alt => "", :src => "http://placehold.it/250x250"}/
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos qofficiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidlaudantium dicta sit consequatur voluptatum. Temporibus.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.discussion
+            %section.box.discussion
+              %h1
+                %a{ :href => "#" } I need to take control of my health!
+              %p.author
+                %strong Ed Hardy,
+                Chicago, IL
+              .media
+                %video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :preload => "auto",}
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.mp4", :type => "video/mp4"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.webm", :type => "video/webm"}/
+                  %source{:src => "http://video-js.zencoder.com/oceans-clip.ogv", :type => "video/ogg"}/
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos qofficiis rem iste dolorum nisi!
+              .box_controls
+                %a
+                  %i.icon-heart
+                  Like
+                %a
+                  %i.icon-comment
+                  Comment
+              %ul.comment_list
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %a{:href => "#", :title => "User name"} User name
+                    %p Nostrum tempore inventore corporis harum nisi atque sequi sunt porro at dolor beatae ea facere incidlaudantium dicta sit consequatur voluptatum. Temporibus.
+                    .time_stamp 2 hours ago
+                    %a.like{:href => "#"}
+                      %i.icon-heart
+                      Like
+                / // end .comment
+                %li.comment
+                  .user_avatar
+                    %a{:href => "#"}
+                      %img{:alt => "", :src => "http://placehold.it/57x57"}/
+                  .comment_body
+                    %form
+                      %textarea{ :placeholder => "Add a comment"}
+                / // end .comment
+              / end .comment_list
+            / end .box.discussion
+          / end .span3
+        / end .row
+      / end .span6
+    / end .row
+  / end #feed
+/ end .container
+= render "shared/featured_content"

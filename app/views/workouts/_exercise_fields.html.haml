@@ -1,0 +1,64 @@
+/ .row#new-exercise-fieldset{:class => "exercise-#{f.object.id}"}
+/   .well.span9
+/     %div{:style => "float:right;"}
+/       = link_to_remove_exercise_instance(f.object)
+/     %fieldset.form-inline
+/       %label.inline
+/         = f.input :name
+/       %label.inline
+/         = f.input :reps, :as => :string, :input_html => { class: "span1" }
+/       %label.inline
+/         = f.input :weight, :as => :string, :input_html => { class: "span1" }
+      
+/       %div.collapse{:id => "add-more-info-#{f.object_id}"}
+/         %label.inline
+/           = f.input :equipment
+/         %label.inline
+/           = f.label :image, "Attach Photo"
+/           = f.file_field :image
+/         = f.input :description, :input_html => { :rows => 7, :class => "span5" }
+/ = link_to "Add More Info", "#add-more-info-#{f.object_id}", class: "add-more-exercise", :data => { :toggle => "collapse" }, style: "float:right"
+
+/ %fieldset
+/   %legend Exercises
+
+:css
+  fieldset.form-inline div.control-group { display: inline-block; }
+
+#new-exercise-fieldset{:class => "exercise"}
+  .well
+    %fieldset.form-inline
+      .controls.controls-row
+        %button.orange_button{:style => "float:left"}
+          %i.icon-resize-vertical
+        .span4= f.input :name, placeholder: "Name*", label: false
+        .span2= f.input :reps, :as => :string, :placeholder => "Reps*", label: false, input_html: { class: 'span12' }
+        .span2= f.input :weight, :as => :string, :placeholder => "Weight*", label: false, input_html: { class: 'span12' }
+        lbs
+        %button.orange_button.small.pull-right
+          %i.icon-pencil
+        = link_to_remove_exercise_instance(f.object)
+      / end .controls.controls-row
+
+      .controls.controls-row
+        = link_to "#add-more-info-#{f.object_id}", class: "add-more-exercise orange_button pull-right", :data => { :toggle => "collapse" } do
+          Tell us more
+          %i.icon-circle-arrow-right
+      / end .controls.controls-row
+
+      %div.collapse{:id => "add-more-info-#{f.object_id}"}
+        .well
+          .controls.controls-row
+            = f.input :equipment, label: false, placeholder: "Equipment", input_html: { class: 'span12' }
+
+            .exercise_photo{:style => "display:none"}= f.file_field :image, class: "exercisePhoto"
+            = link_to '#', class: "btn btn-large pull-right clickExercisePhoto" do
+              %i.icon-picture
+            %span.exercise_photo_name.pull-right
+          / end .controls.controls-row  
+
+          .controls.controls-row
+            = f.input :description, label: false, placeholder: "Description", input_html: { rows: 3, class: "input-block-level" }
+          / end .controls.controls-row
+        / end .well
+    / end .well

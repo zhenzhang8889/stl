@@ -1,0 +1,72 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+        %li
+          %a{:href => "#"} My Stacks
+          %span.divider /
+        %li.active My Chest Workourts
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span9
+      %section.box.stack
+        .picture{:href => "#"}
+          - if @stack.image
+            %center= image_tag @stack.image.item.url(:stack, false)
+          - elsif @stack.content_image
+            = image_tag @stack.content_image.item.url(:stack, false)
+          - else
+            = image_tag "320x235.gif"
+        / end .picture
+        .page-header
+          %h1= @stack.name
+          %p Created #{@stack.created_at.strftime("%b %e, %Y")}
+        / end .page-header
+        %p= @stack.description
+        .box_controls
+          - if signed_in?
+            %span{class: "like_stack_#{@stack.id}"}
+              = link_to_like_stack(@stack)
+            %span{class: "follow_stack_#{@stack.id}"}
+              = link_to_follow_stack(@stack)
+            %a{:href => "#"}
+              %i.icon-share
+              Share
+            - stack_owner_tools(@stack) do
+              = link_to edit_stack_path(@stack) do
+                %i.icon-wrench
+                Edit
+              = link_to @stack, method: :delete, confirm: "Are you sure?" do
+                %i.icon-trash
+                Delete
+
+      / end .box.stack
+    / end .span9
+    .span3
+      %section.box.followers.simple
+        %ul
+          - if @followers.present?
+            - @followers.each do |u|
+              %li
+                = link_to u, rel: "tooltip", data: { placement: "top", original_title: u.name } do
+                  = profile_image_for(u, 57)
+        %p
+          = pluralize(@stack.followers_count, "follower")
+          - if @followers.size > 9
+            %a{:href => "#"}
+              View All
+      / end .box.followers
+    / end .span3
+  / end .row
+/ end .container
+.container
+  #feed
+    = render 'shared/feed/tabs'
+    #tab-content
+      = render template: "stacks/items"
+    
+  / end #feed
+/ end .container
+= render "shared/featured_content"

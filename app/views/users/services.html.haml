@@ -1,0 +1,5 @@
+= render "shared/feed/filter"
+%ol#feed_list.container
+  - @feed_items.each do |item|       
+    = render "shared/feed/service_view", service: item.feedable, feed: item        
+/ end #feed_list.container

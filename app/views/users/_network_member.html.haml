@@ -1,0 +1,26 @@
+%ol#feed_list
+  - if members.count < 1
+    %li.item
+      %p.lead No users with that interest.
+  - members.each do |user|
+    - unless user == current_user
+      %li.item.span4{style: "width:30.5%"}
+        %section.box.follow_network
+          %header
+            .avatar
+              = link_to user, {:rel => "tooltip", :data => { :placement => "right", :original_title => user.name}} do
+                = profile_image_for(user, 57)
+              = user.name
+            / end .avatar
+            = link_to user.location
+
+            .user-tagline= user.tagline
+
+          %footer
+            .social_actions
+              .pull-right
+                - if signed_in?
+                  #follow_form
+                    %span{class: "follow_link_#{user.id}"}
+                      = link_to_follow_unfollow(user, button: "")
+

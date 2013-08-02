@@ -1,0 +1,4 @@
+%p #{@user.name},
+%p
+  = link_to user_url(@n.notifiable.follower) do
+    = "#{@n.notifiable.follower.name} followed you!"

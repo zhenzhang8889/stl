@@ -1,0 +1,16 @@
+%h1 Listing posts
+- @posts.each do |post|
+  .post-teaser
+    %b= link_to post.name, post, class: "post-name"
+    %p
+      %span.post-body= post.body
+    %span.post-link= link_to post.link
+    - if post.tags.present?
+      Tags:
+      = tag_links(post)
+
+    %p
+      %span.post-buttons
+        = link_to 'edit', edit_post_path(post)
+        = link_to 'delete', post, method: :delete, data: { confirm: 'Are you sure?' }
+%br/

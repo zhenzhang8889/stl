@@ -1,0 +1,9 @@
+.well
+  .span5
+    = builder.input :youtube, label:false, placeholder: "YouTube video link", input_html: { class: "input-block-level" }
+  .span1 OR
+  .span1
+    = link_to "Upload", "#", id: "upload#{object.capitalize}VideoLink"
+    %div.hiddenPanda{:id => "hiddenPanda#{object.capitalize}"}
+      %label Upload Video
+      %input#returned_video_id{:name => "#{object}[videos_attributes][0][panda_video_id]", :type => "hidden"}

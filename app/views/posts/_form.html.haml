@@ -1,0 +1,74 @@
+= simple_form_for @post, remote: true, html: { :multipart => true, id: "article_new_form" } do |f|
+  / = render 'shared/error_messages', object: f.object
+  .row-fluid
+    .span8
+      %legend Contribute an Article
+
+      = f.input :name, placeholder: "Title", label: false, input_html: { class: "input-block-level" }
+      = f.input :body, placeholder: "Article Content", label: false, input_html: { class: "input-block-level", style: "min-height:150px;" }
+
+      #post_upload_fields{:style => "display:none"}
+        = f.simple_fields_for :images, @post.images.build do |image_fields|
+          = image_fields.label "Upload Photo"
+          = image_fields.file_field :item, class: "uploadPostPic"
+
+      = f.input :tag_list, label: false, input_html: { class: "input-block-level", style: "margin: 10px 0;" }, placeholder: "Add Tags"
+      #sharePost.collapse
+        = f.text_field :share_list, class: "input-block-level span9", style: "margin: 10px 0;", placeholder: "Share"
+        .span2
+          %p.social.pull-right
+            %a.dev.google{ :href => "#" } Google
+            %a.dev.facebook{ :href => "#" } Facebook
+            %a.dev.twitter{ :href => "#" } Twitter
+
+      #upload_progress_post.panda_upload_progress
+
+      .row-fluid
+        .span8
+          .links
+            %a#postUploadPhotoLink{ :href => "#"}
+              %i.icon-picture
+              %span.desc Add a photo
+            | 
+            = link_to "#", data: { toggle: "collapse", target: "#postVideoFooter" }, class: "addVideoPostLink" do
+              %i.icon-facetime-video
+              Add a video
+            | 
+            = link_to "#", data: { toggle: "collapse", target: "#sharePost" }, class: "sharePostLink" do
+              %i.icon-share
+              Share
+            |
+            ADD TO SHELF
+          / end .links
+        / end .span8
+      / end.row-fluid
+
+      #postVideoFooter.collapse
+        .row-fluid
+          - post_auth_params = Panda.signed_params('post', "/videos.json")
+          = content_tag "div", class: "post_video", data: { auth: post_auth_params } do
+            = f.simple_fields_for :videos, @post.videos.build do |builder|
+              = render "shared/upload_video", object: "post", builder: builder
+    / end .span8
+    .span4
+      %aside
+        %legend{:style => "padding-top:30px;"}
+          %center TIP
+        .well{:style => "height: 200px;"}
+          %p
+            Want everyone to know about your healthy chicken recipes? Or maybe you have a success story you want to share? Be as creative as you'd like, and help others surpass the limit!
+        / end .well
+      / end .aside
+    / end .span4
+  / end .row-fluid
+  %hr
+  .row-fluid
+    .span8
+      = f.submit "Publish", class: "btn btn-inverse", id: "post_submit"
+      %span#link-loading.post{:style => "display:none;"}= image_tag "ajax-loader.gif"
+      %button.btn.btn-link Save as Draft
+      |
+      = link_to "Cancel", "#", class: "btn btn-link cancel"
+    / end .span8
+  / end .row-fluid
+/ end form

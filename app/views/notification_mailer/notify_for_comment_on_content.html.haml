@@ -1,0 +1,4 @@
+%p #{@user.name},
+%p
+  = link_to polymorphic_url(@n.notifiable.commentable) do
+    = "#{@n.notifier.name} just commented on your #{@n.notifiable.commentable.class.table_name.singularize}"

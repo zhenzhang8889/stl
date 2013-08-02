@@ -1,0 +1,8 @@
+= render "shared/feed/filter"
+
+.row-fluid
+  .span12
+    .box.following
+      %ul
+        = render partial: "network_list", as: :user, collection: current_user.followed_users
+

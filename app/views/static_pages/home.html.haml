@@ -1,0 +1,169 @@
+- if current_user
+  = render 'users/home'
+- else
+  - content_for :modals do
+    = render 'shared/modals/sign_in'
+  .wrapper.background-image
+    .container
+      .row
+        .span6
+          %section#headline
+            %h1 An easy way to share and discover fitness content.
+            /%h1.achieve Achieve
+            /%h1.surpass Surpass
+            %p.lead Connect with trainers, athletes, exercisers, and everyone in between.
+            #user_first_step= render template: "devise/registrations/new"
+            / end #signup_form
+          / end #headline
+        / end .span6
+        .span6            
+          %iframe#promo_video.video-js.vjs-default-skin{ :width =>"150", :height => "150", :src => "http://www.youtube.com/embed/8Yo9BXbb0J8", :frameborder => "0"}
+        / end .span6
+      / end .row
+    / end .container
+  / end .wrapper
+  .container
+    .row
+      .span12
+        %form#fitness_goals_search{:action => "/search/index", :method => "get"}
+          %h1 What is your fitness goal?
+          %i.icon-search.icon-2x
+          %input.goal_search{:type => "text", :placeholder => "strength", :name => "search_keyword"}/
+          %a.btn.btn-inverse{:href => "#"} GO
+      #fitness_goals_search_modal.modal.hide.stl_modal
+        .modal-header
+          %h1.small_title
+            MY DREAM
+          %h2.title
+            I want to build muscle strength
+          %p You’re just one step away from connecting with the wider STL community of your peers, experts, and resources that will help you realize your dreams!
+        .modal-body
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam tempora dolore quaerat laborum eos eum qui ratione rerum recusandae reprehenderit est repudiandae nostrum ea officia voluptatem amet harum. Amet eaque!
+        .modal-footer
+          %a.pull-left{:href => "#"} Some other time
+    / end .row
+    #marketing.row
+      .span4
+        %section.meet_fitness_expert
+          %h1 Meet Experts
+          %p.lead Find people with experience to get help on your goals.
+        / end .meet_fitness_expert
+      / end .span4
+      .span4
+        %section.share_your_expertise
+          %h1 Share your fitness life
+          %p.lead Post updates, tips, and daily workouts
+        / end .share_your_expertise
+      / end .span4
+      .span4
+        %section.motivate_your_friends
+          %h1 Stay Active
+          %p.lead Find yoga classes, training sessions, and events near you.
+        / end .motivate_your_friends
+      / end .span4
+    / end #marketing.row
+  / end .container
+  .wrapper
+    .container
+      #teaser.carousel.slide
+        .carousel-inner
+          .item.row.active
+            .span3
+              %section.box.discussion
+                %h1
+                  %a{ :href => "#" } I need to take control of my health!
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.discussion
+            / end .span3
+            .span3
+              %section.box.status
+                %h1
+                  %a{ :href => "#" } Dreams won’t make you fitter. Staying Focused will!
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.status
+            / end .span3
+            .span3
+              %section.box.workout
+                %h1
+                  %a{ :href => "#" } Workout title
+
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.workout
+            / end .span3
+            .span3
+              %section.box.blog_post
+                %h1
+                  %a{ :href => "#" } How to burn your calories faster
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.blog_post
+            / end .span3
+          / end .item.row
+          .item.row
+            .span3
+              %section.box.discussion
+                %h1
+                  %a{ :href => "#" } I need to take control of my health!
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.discussion
+            / end .span3
+            .span3
+              %section.box.status
+                %h1
+                  %a{ :href => "#" } Dreams won’t make you fitter. Staying Focused will!
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.status
+            / end .span3
+            .span3
+              %section.box.workout
+                %h1
+                  %a{ :href => "#" } Workout title
+
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.workout
+            / end .span3
+            .span3
+              %section.box.blog_post
+                %h1
+                  %a{ :href => "#" } How to burn your calories faster
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.blog_post
+            / end .span3
+          / end .item.row
+        / end .carousel-inner
+        %a.carousel-control.left{"data-slide" => "prev", :href => "#teaser"} ‹
+        %a.carousel-control.right{"data-slide" => "next", :href => "#teaser"} ›
+      / end #teaser.carousel.slide
+    / end .container
+  / end .wrapper

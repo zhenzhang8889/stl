@@ -1,0 +1,27 @@
+$("#feedback_button").click(function(){
+    	$('.form').slideToggle();
+});
+
+send_feedback: function(){
+    	$('#submit_form').click(function(){
+    		if($('#feedback_text').val() != ""){
+    			$('.status').text("");
+    			$.ajax({
+    				type: "POST",
+      			  	url: "./process_email.php",
+      			  	data: 'feedback=' + $('#feedback_text').val(),
+	      			success: function(result,status) {
+	      				//email sent successfully displays a success message
+	      				if(result == 'Message Sent'){
+	      					$('.status').text("Feedback Sent");
+	      				} else {
+	      					$('.status').text("Feedback Failed to Send");
+	      				}
+	      			},
+	      			error: function(result,status){
+	      				$('.status').text("Feedback Failed to Send");
+	      			}
+      			});
+    		}
+    	});
+    }

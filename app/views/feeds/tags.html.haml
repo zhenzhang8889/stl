@@ -1,0 +1,8 @@
+.container
+  #feed{style: "margin-top:20px;"}
+    = render 'shared/feed/filter', :locals => {:user => current_user}
+    / end .row
+    #feed_contents
+      %ol#feed_list.container
+        - @feed_items.each do |item|
+          = render_feed_item_for(item)

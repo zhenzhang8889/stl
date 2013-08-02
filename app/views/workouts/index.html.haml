@@ -1,0 +1,14 @@
+%h1 Listing workouts
+- @workouts.each do |workout|
+  .workout-teaser
+    %b= link_to workout.name, workout, class: "workout-name"
+    %p
+      %span.workout-description= workout.description
+    - if workout.tags.present?
+      Tags:
+      = tag_links(workout)
+      
+      %span.workout-buttons
+        = link_to 'edit', edit_workout_path(workout)
+        = link_to 'delete', workout, method: :delete, data: { confirm: 'Are you sure?' }
+%br/

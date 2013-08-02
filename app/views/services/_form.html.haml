@@ -1,0 +1,97 @@
+= simple_form_for @service, remote: true, html: { :multipart => true, id: "service_new_form" } do |f|
+  .row-fluid
+    .span8
+      %legend Add a service
+      
+      = f.input :name, placeholder: "Service Name*", label: false, input_html: { class: "input-block-level" }
+      = f.input :description, placeholder: "Service Description*", label: false, input_html: { class: "input-block-level", style: "min-height:150px;" }
+      = f.input :location, placeholder: "Location*", label: false, input_html: { class: "input-block-level" }
+      
+      %div.service_pse
+        %div.pse_elemnt          
+          = f.input :price, placeholder: "$", label: "Price*", input_html: {class: "input-block-level"}
+          
+        %div.pse_elemnt          
+          = f.input :spots, placeholder: "0", label: "Spots*", input_html: {class: "input-block-level"}                      
+        
+        %div.pse_elemnt
+          = f.input :expiration_date, :as => :string, label: "Expiration Date*", :input_html => { :class => 'jquery-ui-date', :value => @bp_reading.try(:recorded_at).try(:strftime,'%m/%d/%Y')}
+       
+      %div.clearx
+      = f.input :tag_list, label: false, input_html: { class: "input-block-level", style: "margin: 10px 0;" }, placeholder: "Add Tags"
+      
+      #shareService.collapse
+        = f.text_field :share_list, class: "input-block-level span10", style: "margin: 10px 0;", placeholder: "Share"
+        .span4
+          %p.social.pull-right
+            %a.dev.google{ :href => "#" } Google
+            %a.dev.facebook{ :href => "#" } Facebook
+            %a.dev.twitter{ :href => "#" } Twitter
+            
+      #service_upload_fields{:style => "display:none;"}
+        = f.simple_fields_for :images, @service.images.build do |image_fields|
+          = image_fields.label "Upload Photo"
+          = image_fields.file_field :item, class: "uploadServicePic"
+
+        / - auth_params = Panda.signed_params('post', "/videos.json")
+        / = content_tag "div", class: "workout_video", data: {auth: auth_params} do
+        /   = simple_fields_for(@workout.videos.build) do |builder|
+        /     = render "shared/upload_video", object: "workout", builder: builder
+      / end #upload_fields        
+      #upload_progress_service.panda_upload_progress
+
+      .row-fluid
+        .span8
+          .links
+            %a#serviceUploadPhotoLink{ :href => "#"}
+              %i.icon-picture
+              %span.desc Add a photo
+            | 
+            = link_to "#", data: { toggle: "collapse", target: "#serviceVideoFooter" }, class: "addVideoServiceLink" do
+              %i.icon-facetime-video
+              Add a video
+            | 
+            = link_to "#", data: { toggle: "collapse", target: "#shareService" }, class: "shareServiceLink" do
+              %i.icon-share
+              Share
+            
+          / end .links
+        / end .span8
+      / end.row-fluid
+      #serviceVideoFooter.collapse
+        .row-fluid
+          - service_auth_params = Panda.signed_params('post', "/videos.json")
+          = content_tag "div", class: "service_video", data: { auth: service_auth_params } do
+            = f.simple_fields_for :videos, @service.videos.build do |builder|
+              = render "shared/upload_video", object: "service", builder: builder
+      
+          
+    / end .span8
+    .span4
+      %aside
+        %legend{:style => "padding-top:30px;"}
+          %center TIP
+        .well{:style => "height: 200px;"}
+          %p
+            Offer your services here, such as training sessions, kick-boxing classes, etc
+        / end .well
+      / end .aside
+    / end .span4
+  / end .row-fluid
+  %hr
+  .row-fluid
+    .span8
+      = f.label "*Required Fields"
+      %div.promotion        
+        = check_box_tag :promotion
+        = f.label "Promotion"
+        
+      = f.submit "Publish", class: "btn btn-inverse", id: "service_submit"
+      %div.clearx
+            
+      
+      %span#link-loading.service{:style => "display:none;"}= image_tag "ajax-loader.gif"
+       
+    / end .span8
+  / end .row-fluid
+/ end form 

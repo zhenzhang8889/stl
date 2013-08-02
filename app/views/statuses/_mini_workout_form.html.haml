@@ -1,0 +1,32 @@
+.row-fluid
+  #add_errors.alert.alert-error{style: "display:none;"}
+    %ul.unstyled
+  %h4
+    %center Share that you just worked out!
+    %center OR
+    %center= link_to "Use extended workout form", new_workout_path
+    %hr
+  = simple_form_for mini, url: mini_workout_statuses_path, html: { method: :post}, method: :post do |f|
+    = f.hidden_field :mini_present, value: true
+    .span12
+      %h5 Type of workout:
+      #mini_options
+        - Status::MINI_WORKOUT_OPTS.each do |workout|
+          %p{style: "float:left; height:30px; width: 25%"}= link_to workout.capitalize, "#", class: "btn", data: { workout: workout }
+        = f.hidden_field :mini_workout_type, value: ""
+
+    .span5.offset7.pull-right
+      = f.input :mini_workout_type_custom, label: false, placeholder: "Other"
+
+    %hr
+    .span12
+      %h5 Duration:
+      #mini_duration_options
+        - Status::MINI_WORKOUT_DURATION_OPTS.each do |d|
+          %p{style: "float:left; height:30px; width: 25%"}= link_to d, "#", class: "btn", data: { duration: d }
+        = f.hidden_field :duration, value: ""
+
+    .span5.offset7.pull-right
+      = f.input :duration_custom, label: false, placeholder: "Other"
+
+    = f.submit "Share", class: "btn btn-warning share_submit"

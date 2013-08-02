@@ -1,0 +1,178 @@
+/* --------------------------------------------------------------
+  Layout
+-------------------------------------------------------------- */
+
+body {
+  padding-top: 70px;
+
+
+  &.feeds.index, &.feeds.tags, &.users.show, &.stacks.index, &.feeds {
+    background: url("http://subtlepatterns.com/patterns/cross_scratches.png") repeat scroll 0% 0% transparent;
+
+  }
+
+  }
+
+/* Logo
+-------------------------------------------------------------- */
+#logo {
+  $logo_width: 282px;
+  $logo_height: 50px;
+  margin: 18px 0 0 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+  width: $logo_width;
+  height: $logo_height;
+
+  a {
+    display: block;
+    width: $logo_width;
+    height: $logo_height;
+    text-indent: -9999em;
+    background: image-url('logo.png') no-repeat 0 0;
+  }
+}
+
+#logo_footer {
+  $logo_width: 370px;
+  $logo_height: 160px;
+  margin: 18px 0 0 0;
+  padding: 0;
+  display: inline-block;
+  float: left;
+  width: $logo_width;
+  height: $logo_height;
+
+  a {
+    display: block;
+    width: $logo_width;
+    height: $logo_height;
+    text-indent: -9999em;
+    background: image-url('logo_footer.png') no-repeat center center;
+  }
+}
+
+/* Wrappers
+-------------------------------------------------------------- */
+
+
+.wrapper.background-image {
+ background: image-url('background.png') no-repeat; 
+ background-size: 100%;
+}
+
+.wrapper {
+  background: #f4f4f4;
+  padding: 40px 0 60px 0;
+  border-top: solid 1px #d8d8d8;
+  border-bottom: solid 1px #d8d8d8;
+
+  &.narrow {
+    padding: 0;
+  }
+
+  &.status {
+    padding: 40px 0 20px 0;
+    margin: 0 0 $gridGutterWidth 0;
+    background: #fff;
+  }
+}
+
+/* Headline
+-------------------------------------------------------------- */
+#headline {
+  h1 {
+    margin: 0;
+    line-height: 50px;
+    // padding: 0 0 0 60px;
+
+    // &.aim {
+    //   background: image-url('icons/48x48/aim.png') no-repeat left center;
+    // }
+
+    // &.achieve {
+    //   background: image-url('icons/48x48/achieve.png') no-repeat left center;
+    // }
+
+    // &.surpass {
+    //   background: image-url('icons/48x48/surpass.png') no-repeat left center;
+    // }
+  }
+}
+
+/* Promo video
+-------------------------------------------------------------- */
+#promo_video {
+  width: 100%;
+  height: 280px;
+  border-bottom: solid 5px $orange;
+}
+
+/* Goals counter
+-------------------------------------------------------------- */
+#goals_counter {
+  padding: 20px;
+  background: #e2e2e2;
+
+  h1 {
+    margin: 0;
+    padding: 0;
+    line-height: 1em !important;
+  }
+}
+
+/* Marketing
+-------------------------------------------------------------- */
+#marketing {
+  section {
+    padding: 0 0 20px 60px;
+
+    h1 {
+      font-size: 22px;
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: inherit;
+    }
+
+    &.meet_fitness_expert {
+      background: image-url('icons/48x48/man.png') no-repeat 0 10px;
+    }
+
+    &.share_your_expertise {
+      background: image-url('icons/48x48/comment.png') no-repeat 0 10px;
+    }
+
+    &.motivate_your_friends {
+      background: image-url('icons/48x48/love.png') no-repeat 0 10px;
+    }
+  }
+}
+
+/* Footer
+-------------------------------------------------------------- */
+#footer {
+  padding-top: 50px;
+
+  section {
+    &> h1 {
+      font-size: 22px;
+    }
+
+    .lead {
+      font-size: 16px;
+      line-height: inherit;
+    }
+  }
+}
+
+#copyright {
+  @include box-sizing(border-box);
+  width: 100%;
+  margin-top: 50px;
+  padding: 20px;
+  color: $white;
+  background: $black;
+}

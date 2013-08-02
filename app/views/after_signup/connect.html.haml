@@ -1,0 +1,35 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+        %li
+          %a{:href => "#"} My Network
+          %span.divider /
+        %li.active Connect
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span6.push.offset3
+      .well.center
+        %h2 Fitness is always better with people you know!
+        = link_to_authorize_social(:facebook, :from => :signup)
+        %br
+        %br
+        = link_to_authorize_social(:twitter, :from => :signup)
+        %br
+        %br
+        = link_to_authorize_social(:google_oauth2, :from => :signup)
+        %br
+        %br
+        = link_to_authorize_social(:linkedin, :from => :signup)
+      / end .hero-unit
+  / end .row
+  .row
+    .span12
+      = link_to next_wizard_path, class: "btn pull-right" do
+        Next
+        %i.icon-circle-arrow-right
+    / end span12
+  / end .row
+/ end .container

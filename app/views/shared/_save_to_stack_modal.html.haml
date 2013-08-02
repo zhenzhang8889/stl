@@ -1,0 +1,10 @@
+- # REFACTOR: GET RID OF DAMN INLINE CSS - written in a rush
+#saveToStackModal.modal.hide.fade{"aria-hidden" => "true", "aria-labelledby" => "myModalLabel", :role => "dialog", :tabindex => "-1"}
+  #saveFade{style: "display:none; position: absolute; z-index:2222; background: black repeat; opacity: 0.8; height:100%; width:100%"}
+    %p#link-loading{:style => "position:absolute; top:30%; left: 40%; z-index:3333; display:none"}= image_tag "ajax-loader.gif"
+    %h1#success{:style => "display:none; position:absolute; top:30%; left: 40%; z-index:3333;"} Success
+  .modal-header
+    %button.close{"aria-hidden" => "true", "data-dismiss" => "modal", :type => "button"} ×
+    %h3#myModalLabel Save to Stack
+  .modal-body
+

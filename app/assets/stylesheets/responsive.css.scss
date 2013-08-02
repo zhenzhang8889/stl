@@ -1,0 +1,29 @@
+/* Phones
+-------------------------------------------------------------- */
+@media (max-width: 480px) {
+  @import 'media/phones'
+}
+
+/* Phones to tablets 
+-------------------------------------------------------------- */
+@media (max-width: 767px) {
+  @import 'media/phones_to_tablets'
+}
+
+/* Portrait tablets
+-------------------------------------------------------------- */
+@media (min-width: 768px) and (max-width: 979px) {
+  @import 'media/portrait_tablets'
+}
+
+/* Default
+-------------------------------------------------------------- */
+@media (min-width: 980px) {
+  @import 'media/default'
+}
+
+/* Large Display
+-------------------------------------------------------------- */
+@media (min-width: 1200px) {
+  @import 'media/large_display'
+}

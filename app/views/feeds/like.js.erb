@@ -1,0 +1,5 @@
+$(".like_feed_item_<%= @feed_item.id %>").html("<%= j link_to_like_feed(@feed_item, @content) %>");
+
+<% @count = @content.reload %>
+$(".like_count_<%= @feed_item.id %>").html("<%= j likes_count_helper(@content) %>");
+$(".like_count_<%= @feed_item.id %> a").tooltip('fixTitle');

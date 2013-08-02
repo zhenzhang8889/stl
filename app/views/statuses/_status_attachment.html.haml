@@ -1,0 +1,7 @@
+- if status.has_attached_thumbnail?
+  .shared_link_image
+    = link_to status.attached_url, target: "_blank" do
+      = image_tag status.attached_url_image, style: "width: 126px;"
+%h2.shared_link_title= status.attached_url_title
+%p.shared_link_description= status.attached_url_description
+%p.shared_link_url= link_to status.attached_url, status.attached_url, target: "_blank"

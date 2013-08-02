@@ -1,0 +1,15 @@
+.container
+  #feed.span12
+    = render 'shared/feed/tabs'
+    = render "shared/feed/filter"
+    #tab-content
+      - # REFACTOR: use a session and destroy afterwards, instead of params
+      - if params[:omniauth]
+        = render template: "devise/registrations/edit"
+        :javascript
+          var active;
+          active = $("#feed_content_tabs").find("li.active");
+          $(active).next().addClass("active");
+          $(active).removeClass("active");
+      - else
+        = render template: "users/profile_settings"

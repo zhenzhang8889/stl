@@ -1,0 +1,4 @@
+setTimeout(function() {
+      $(".notify_count_menu").html("<%= current_user.notifications.unviewed.for_site.count %>");
+      $(".notify_count_menu").attr("style", "");
+}, 1000);

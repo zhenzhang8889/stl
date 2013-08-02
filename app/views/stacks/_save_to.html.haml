@@ -1,0 +1,19 @@
+.row-fluid
+  // Select stacks to save item to
+  #add_errors.alert.alert-error{style: "display:none;"}
+    %ul.unstyled
+  = form_tag(eval("save_to_stacks_#{content.type_name.downcase}_path(content)"), method: :post, remote: true) do
+    = select_tag :stacks, options_from_collection_for_select(current_user.stacks, "id", "name"), multiple: true, class: "block-level-input"
+    %p= submit_tag "Add", class: "btn btn-warning submit_save"
+
+  // OR create a new stack and save item to it
+  - @stack = Stack.new
+  = simple_form_for @stack, input_html: { multiplart: true }, remote: true do |f|
+    %h4 Or create a new stack to save your #{content.type_name} to
+    = f.input :name, label: false, placeholder: "Name", input_html: { class: "input-block-level" }
+    = f.input :description, label: false, placeholder: "Descriptions", input_html: { class: "input-block-level", rows: 2 }
+    = f.simple_fields_for :stacked_items, @stack.stacked_items.build do |i|
+      = i.hidden_field :stackable_id, value: content.id
+      = i.hidden_field :stackable_type, value: content.type_name
+      = hidden_field_tag :from_modal, true
+    = f.submit "Create and save", class: "btn btn-warning submit_save"

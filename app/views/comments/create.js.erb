@@ -1,0 +1,14 @@
+<% if @comment.errors.any? %>
+	<% # alert somehow? %>
+<% else %>
+	<% @comments = @content.comments.order(
+            "created_at DESC").paginate(page: params[:page]).per_page(4) %>
+	$("#comment_content").val('');
+	$(".cl_<%= @content.append_to_method %>").html('<%= j render(@comments) %>');
+
+	<% @count = @content.reload %>
+	$(".comments_count").html("(<%= j @count.comments_count.to_s %>)");
+	$(".pagination ul > li:last-child > a").attr("href", "/<%= @content.class.table_name %>/<%= @content.id %>?page=2")
+	$("#more_<%= @content.low_type_name %>_comments").attr("disabled", false)
+<% end %>
+

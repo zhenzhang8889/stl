@@ -1,0 +1,43 @@
+%li.item.span4
+  %section.box.service
+    %div.price
+      = dollar_price( service.price )
+      
+    %header
+      .avatar        
+        = link_to service.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => service.user.name}} do
+          = profile_image_for(service.user, 34)
+      
+      %div.provided
+        Provided by
+        
+      %br      
+        = link_to service.user.name, service.user
+        / end .avatar        
+        .timestamp
+          = shared_service(service.created_at)
+    %h1
+      = link_to service.name, service
+    .media
+      - if service.has_videos?
+        - service.videos.each do |v|
+          = render "shared/video_display", v: v, h: 200, w: 325
+        %br
+      - if service.has_images?
+        - service.images.each do |i|
+          = render "shared/image_display", i: i
+      
+      / end .media
+      = raw service.description
+      %p
+      - if feed.tags.present?
+        - feed.tags.map(&:name).map do |t|
+          = link_to tags_feeds_path(tag: t), class: 'tag' do
+            %i.icon-tag
+            = t
+        / end tags
+        
+    %footer
+      = render 'shared/feed/social_like', feed: feed, content: service
+      = render 'shared/feed/social_actions', feed: feed, content: service
+        

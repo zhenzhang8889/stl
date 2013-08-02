@@ -1,0 +1,11 @@
+#add_errors.alert.alert-error{style: "display:none;"}
+  %ul.unstyled
+= simple_form_for(Compliment.new) do |f|
+  = f.error_notification
+  = hidden_field_tag :user_id, user.id
+  .form-inputs
+    = f.input :canned_message, :collection => Compliment::CANNED_MESSAGES, :as => :select
+    Or
+    = f.input :custom_message
+    = f.hidden_field :motivator_id, value: current_user.id.to_i
+  = f.button :submit, "Compliment", class: "btn btn-warning"

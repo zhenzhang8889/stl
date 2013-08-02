@@ -1,0 +1,21 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+        %li
+          %a{:href => "#"} My Network
+          %span.divider /
+        %li.active Follow
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row-fluid
+    .span2
+      #filter_network.btn-group.btn-group-vertical
+        = link_to "All", sort_network_users_path(topic: :all), class: "btn btn-large active", remote: true
+        - User::NETWORK_FILTER.each do |f|
+          = link_to f, sort_network_users_path(topic: f), class: "btn btn-large", remote: true
+    .span10
+      %h2 Follow some people!
+      .row-fluid#network_members
+        = render "users/network_member", members: @network

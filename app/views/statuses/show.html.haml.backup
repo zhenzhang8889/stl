@@ -1,0 +1,14 @@
+%p#notice= notice
+%p= @status.content
+
+- if @status.has_videos?
+  - @status.videos.each do |v|
+    = render "shared/video_display", v: v
+
+- if @status.has_images?
+  - @status.images.each do |i|
+    = render "shared/image_display", i: i
+
+- if @status.tags.present?
+  Tags:
+  = tag_links(@status)

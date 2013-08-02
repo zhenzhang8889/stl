@@ -1,0 +1,35 @@
+%p#notice= notice
+%p
+  %b Name:
+  = @post.name
+%p
+  %b Link:
+  = @post.link
+%p
+  = @post.body
+
+- if @post.has_videos?
+  - @post.videos.each do |v|
+    = render "shared/video_display", v: v
+
+- if @post.has_images?
+  - @post.images.each do |i|
+    = render "shared/image_display", i: i
+
+- if @post.tags.present?
+  Tags:
+  = tag_links(@post)
+    
+#vote_form
+  / = form_for Comment.new,:url => post_comment_path(:id => @post.id) do |f|
+  /   = f.text_area :content,:size => "3x3"
+  /   = f.submit"Comment"  
+    
+  / - if current_user && current_user.already_likes_post?(@post)
+  /   .like= link_to 'Unlike!', unlike_post_path(id: @post.id),:remote => true ,:class =>"btn btn-primary btn-mini"
+      
+  / - else
+  /   .like= link_to 'Like!', like_post_path(id: @post.id),:remote => true ,:class =>"btn btn-primary btn-mini"
+- unless @post.user == current_user
+  = render :partial => "thankings/form", :locals => { :user => @post.user, :resource => @post, :resource_thanking => @thanking }
+

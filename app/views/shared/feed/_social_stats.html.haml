@@ -1,0 +1,9 @@
+.social_stats
+  %span{class: "like_count_#{feed.id}"}
+    = likes_count_helper(content)
+  = link_to "#", data: { target: ".cl_#{feed.id}"}, class: "drop_comments" do
+    %span{class: "comment_count_#{feed.id}"}
+      %i.icon-comment
+      = pluralize(content.comments_count, 'comment')
+/ end .social_stats
+

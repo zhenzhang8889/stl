@@ -1,0 +1,15 @@
+- if v.has_youtube?
+  %iframe{:allowfullscreen => "", :frameborder => "0", :height => "#{h}", :width => "#{w}", :src => "http://www.youtube.com/embed/#{v.youtube}", style: "min-height:100px;" }
+- else
+  - if v.ready_to_view?
+    .video{:id => "play_video_#{v.id}"}
+
+    :javascript
+      jwplayer("play_video_#{v.id}").setup({
+        file: "https://s3.amazonaws.com/STL/#{v.h264_encoding.id}.mp4",
+        image: "#{v.h264_encoding.screenshots.first}",
+        height: "#{h}",
+        width: "#{w}"
+      });
+  - else
+    %p Video status: #{v.h264_encoding.status}.

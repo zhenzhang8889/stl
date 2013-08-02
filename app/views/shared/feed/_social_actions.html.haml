@@ -1,0 +1,11 @@
+- if signed_in?
+  .social_actions
+    = link_to_like_feed(feed, content)
+    .pull-right
+      = link_to send("share_modal_#{content.type_name.downcase.pluralize}_path", c_id: content, c_type: content.type_name), remote: true, data: { target: "#shareStackModal", toggle: "modal" } do
+        %i.icon-share
+        Share
+      = link_to save_modal_stacks_path(c_id: content, c_type: content.type_name), remote: true, data: { target: "#saveToStackModal", toggle: "modal" } do
+        %i.icon-save
+        Save
+  / end .social_actions

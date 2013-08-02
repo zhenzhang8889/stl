@@ -1,0 +1,4 @@
+$(".errors").html("<div class='alert alert-error'>Login Failed</div>");
+$("form").on("click", ".new_session_submit", function(e) {
+  return $(".errors").empty();
+});

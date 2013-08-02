@@ -1,0 +1,41 @@
+%li.item.span4
+  %section.box{class: item.stackable.css_name }
+    %header
+      .avatar
+        = link_to item.stackable.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => item.stackable.user.name}} do
+          = profile_image_for(item.stackable.user, 34)
+      / end .avatar
+      = link_to item.stackable.user.name, item.stackable.user
+      .timestamp
+        = time_ago_in_words(item.stackable.created_at)
+      / end .timestamp
+    %h1= link_to item.stackable.feedable_title, item.stackable
+    .media
+      - if item.stackable.has_videos?
+        - item.stackable.videos.each do |v|
+          = render "shared/video_display", v: v, h: 200, w: 325
+        %br
+      - if item.stackable.has_images?
+        - item.stackable.images.each do |i|
+          = render "shared/image_display", i: i
+
+      - if !item.stackable.feedable_title
+        - if item.stackable.has_attached_link?
+          = render 'statuses/status_attachment', status: item.stackable
+    / end .media
+    - if item.stackable.feedable_desc
+      = simple_format h truncate(item.stackable.feedable_desc, length: 260)
+
+    - if item.stackable.tags.present?
+      - item.stackable.tags.map(&:name).map do |t|
+        = link_to tags_feeds_path(tag: t), class: 'tag' do
+          %i.icon-tag
+          = t
+      / end tags
+    %footer
+      = render '/shared/feed/social_stats', feed: item.stackable.feeds.first, content: item.stackable
+      = render '/shared/feed/social_actions', feed: item.stackable.feeds.first, content: item.stackable
+
+    / status comments
+    = render '/shared/feed/comments_for_feed_item', feed: item.stackable.feeds.first, content: item.stackable
+  / end .box.discussion

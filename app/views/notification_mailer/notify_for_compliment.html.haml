@@ -1,0 +1,4 @@
+%p #{@user.name},
+%p
+  = link_to compliments_user_path(@n.user) do
+    = "#{@n.notifiable.motivator.name} just complimented you!"

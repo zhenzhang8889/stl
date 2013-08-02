@@ -1,0 +1,6 @@
+.row-fluid
+  #add_errors.alert.alert-error{style: "display:none;"}
+    %ul.unstyled
+  = simple_form_for content, url: "/#{content.class.table_name}/#{content.id}/share", html: { method: :put}, remote: true do |f|
+    = f.input :share_list, label: false, input_html: { class: "input-block-level span7", style: "margin: 10px 0;" }, placeholder: "Share"
+    = f.submit "Share", class: "btn btn-warning share_submit"

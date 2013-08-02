@@ -1,0 +1,148 @@
+#feed_content_tabs
+  .row
+    .span12
+      %ul.nav.nav-tabs
+
+        /Discover Tabs
+        - for_discover do
+          %li.active
+            = link_to recommended_feeds_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-star
+              Recommended
+          %li
+            = link_to popular_feeds_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-thumbs-up
+              Popular
+          / %li
+          /   = link_to featured_feeds_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+          /     %i.icon-trophy
+          /     Featured
+
+        /Dashboard Tabs
+        - for_dashboard do
+          %li.active
+            %a{"data-toggle" => "tab", :href => "#user_feed_filter_activity"}
+              %i.icon-comments
+              Activity
+
+        /Stacks Index Tabs
+        - for_stacks_show do
+          %li.active
+            = link_to items_stacks_path(format: :js, id: @stack), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-star
+              Stack Items
+          %li
+            = link_to comments_stacks_path(format: :js, id: @stack), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-comment
+              Comments
+
+
+        /Stacks Show Tabs
+        - for_stacks_index do
+          - if signed_in?
+            %li.active
+              = link_to following_stacks_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+                %i.icon-arrow-up
+                Following
+            %li
+              = link_to popular_stacks_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+                %i.icon-thumbs-up
+                Popular
+          - else
+            %li.active
+              = link_to popular_stacks_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+                %i.icon-thumbs-up
+                Popular
+          
+        /Users Network Tabs
+        - for_users_network do
+          %li.active
+            = link_to popular_network_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-thumbs-up
+              Popular
+
+          %li
+            = link_to network_following_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-arrow-up
+              Following
+          %li
+            = link_to network_followers_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-group
+              Followers
+        
+        /Notification
+        - for_notification do
+          %li.active
+            = link_to notification_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-thumbs-up
+              Notification
+
+          %li
+            = link_to message_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-user
+              Messages
+              
+        /Messages
+        - for_messages do
+          %li.active
+            = link_to notification_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-thumbs-up
+              Notification
+
+          %li            
+            = link_to message_users_path(format: :js), remote: true, 'data-toggle' => 'tab'  do
+              %i.icon-user
+              Messages
+              
+        /User Edit Tabs
+        - for_users_edit do
+          %li.active
+            = link_to profile_settings_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-group
+              Profile
+          %li
+            = link_to user_settings_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-group
+              Settings
+          %li
+            = link_to notification_settings_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-group
+              Notifications
+              
+        /User Service Tab
+        - for_service do
+          %li.active
+            = link_to services_users_path(user: @user.id, format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-comment
+              NEAR YOU
+          %li
+            = link_to surpassed_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-edit
+              POPULAR
+          %li
+            = link_to stacks_users_path(user: @user.id, format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-user
+              RECENT          
+              
+        /User Profile Tabs
+        - for_profile do
+          %li.active
+            = link_to posts_users_path(user: @user.id, format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-comments
+              Posts
+          %li
+            = link_to surpassed_users_path(format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-certificate
+              Surpassed
+          %li
+            = link_to stacks_users_path(user: @user.id, format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-folder-open
+              Stacks
+          %li
+            = link_to about_users_path(user: @user.id, format: :js), remote: true, 'data-toggle' => 'tab' do
+              %i.icon-user
+              About
+
+        / - if on_path?("stacks", "index")
+        /   .pull-right
+        /     %a#new_stack_button.btn.btn-warning{:href => "#"} Create New Stack

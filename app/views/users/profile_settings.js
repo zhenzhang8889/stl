@@ -1,0 +1,1 @@
+$('#tab-content').html("<%= escape_javascript render(:file => 'users/profile_settings', :formats => [:html]) %>");

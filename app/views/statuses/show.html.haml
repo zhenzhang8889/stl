@@ -1,0 +1,111 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+        %li
+          %a{:href => root_path} Dashboard
+          %span.divider /
+        %li.active Status updates
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span8
+      .media
+        - if @status.has_videos?
+          - @status.videos.each do |v|
+            = render "shared/video_display", v: v, h: 450, w: 770
+        - if @status.has_images?
+          %center= image_tag @status.images.first.item.url(:show, false)
+      %section.box.status.single
+        %h1
+          = @status.content
+
+        - if @status.has_attached_link?
+          .show_link_attach= render 'statuses/status_attachment', status: @status
+        .user_avatar
+          = link_to @status.user do
+            = profile_image_for(@status.user, 57)
+          = link_to @status.user.name, @status.user
+          %br/
+          = time_ago_in_words(@status.created_at)
+          ago
+      / end .box.status.single
+      .btn-toolbar.pull-left
+        .btn-group
+          = likes_count_helper(@status, style: "btn")
+          %a.btn{:href => "#"}
+            %i.icon-comments
+            = pluralize(@status.comments_count, "comment")
+        / end .btn-group
+      / .btn-toolbar.pull-left
+      - if signed_in?
+        .btn-toolbar.pull-right
+          .btn-group
+            = link_to "Save", save_modal_stacks_path(c_id: @status, c_type: @status.type_name), remote: true, data: { target: "#saveToStackModal", toggle: "modal"}, class: "btn btn-warning"
+          .btn-group
+            %span{class: "like_status_#{@status.id}"}
+              = link_to_like_status_show(@status)
+
+            = link_to send("share_modal_#{@status.type_name.downcase.pluralize}_path", c_id: @status, c_type: @status.type_name), remote: true, data: { target: "#shareStackModal", toggle: "modal" }, class: "btn" do
+              %i.icon-share
+              Share
+        / end .btn-toolbar.pull-right
+      %hr
+      %section#comments
+        %h1 
+          Comments
+          %span.comments_count (#{@status.comments_count})
+        - if signed_in?
+          = form_for current_user.comments.build, remote: true, html: { id: "comment_form"} do |c|
+            = c.text_area :content, placeholder: "Type Something Here", rows: 2, class: "span6"
+            = c.hidden_field :commentable_id, value: @status.id
+            = c.hidden_field :commentable_type, value: 'Status'
+            = c.submit "Post a comment", class: "btn btn-inverse btn-large pull-right"
+            %p.social.pull-left
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+          / end #comment_form
+        %ul.comment_list{class: "cl_#{@status.feeds.first.id}"}
+          = render @comments
+        / end .comments_list
+      
+        = link_to "#", class: "btn btn-inverse btn-large", id: "more_status_comments" do
+          %i.icon-plus
+          More
+        = will_paginate @comments, id: "status_show_pagination", style: "display:none"
+      / end #comments
+    / end .span8
+    .span4
+      .box.related.updates
+        %ul.related_content_list
+          - unless @status.related_content.present?
+            %li
+              %article
+                .content
+                  %h1 No related Content
+          - else
+            - @status.related_content.limit(3).each do |r|
+              %li
+                %article
+                  .content
+                    %h1
+                      = link_to r.content, r
+                    %p= r.user.name
+                    %p= r.created_at.strftime("%e %b %Y")
+    .span4
+      .box.related.sponsored
+        %ul.related_content_list
+          %li
+            %article
+              .content
+                = ad_unit(:medium_rectangle, "ca-pub-4800925536943557", {:slot => "7324584599"})
+
+                / end .content
+              / end article
+        / end .related_content_list
+      / .box.related.content
+    / end .span4
+  / end .row
+/ end .container

@@ -1,0 +1,4 @@
+$(".errors").html("<div class='alert alert-error'>Please input all fields!</div>");
+$("form").on("click", "#feedback_frm", function(e) {
+  return $(".errors").empty();
+});

@@ -1,0 +1,20 @@
+/* --------------------------------------------------------------
+  Feed
+-------------------------------------------------------------- */
+
+#feed {
+  padding: 0 0 $gridGutterWidth 0;
+}
+
+#feed_list {
+  margin: 0;
+  margin-left: -$gridGutterWidth;
+  padding: 0;
+
+  &> li {
+    margin: 0 0 $gridGutterWidth 0;
+    margin-left: $gridGutterWidth;
+    padding: 0;
+    list-style: none;
+  }
+}

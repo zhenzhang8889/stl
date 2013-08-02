@@ -1,0 +1,5 @@
+.social_stats
+  %span{class: "like_count_#{feed.id}"}
+    %i.icon-heart
+    = pluralize(content.likes_count, 'like')  
+/ end .social_stats

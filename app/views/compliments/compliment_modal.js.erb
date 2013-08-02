@@ -1,0 +1,2 @@
+$('#complimentModal .modal-body').html("<%= escape_javascript render(:partial => 'compliments/dynamic_form', :locals => { :user => @user }) %>");
+$("#compliment_canned_message").chosen();

@@ -1,0 +1,6 @@
+.container
+  .row
+    .span6.offset3
+      %h3 #{@user.name} compliments
+      = render(@compliments) || "No current compliments"
+      = will_paginate @compliments

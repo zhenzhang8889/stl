@@ -1,0 +1,124 @@
+/* --------------------------------------------------------------
+  Modals
+-------------------------------------------------------------- */
+
+/* Common modal styles
+-------------------------------------------------------------- */
+.surpass_modal {
+  display: none;
+  padding-bottom: 20px;
+
+  .container-fluid {
+    // padding-right: 0;
+  }
+
+  form {
+    margin: 0;
+
+    fieldset {
+      padding-top: 20px;
+
+      legend {
+        padding-top: 20px;
+        font-weight: bold;
+
+        a {
+          font-size: $baseFontSize;
+          float: right;
+        }
+      }
+    }
+  }
+
+  aside {
+    background: $grayLighter;
+    padding: 0 20px 50px 20px;
+
+    fieldset {
+      padding-bottom: 20px;
+      border-bottom: solid 1px $grayLight;
+    }
+  }
+
+  .or {
+    margin: 20px auto;
+    text-align: center;
+    text-transform: uppercase;
+  }
+
+  hr {
+    margin-top: 0;
+    margin-left: -20px;
+  }
+
+  .right {
+    text-align: right;
+  }
+
+  .social {
+    a {
+      $size: 32px;
+      width: $size;
+      height: $size;
+
+      @include background-size($size);
+    }
+  }
+}
+
+/* Sign In modal
+-------------------------------------------------------------- */
+#sign_in_modal {
+  .social_login {
+    margin: 0 0 $gridGutterWidth 0;
+    padding: 0;
+    overflow: hidden;
+
+    li {
+      list-style: none;
+      float: left;
+      margin: 0;
+      padding: 0;
+    }
+  }
+}
+
+
+/* Feedback In modal
+ * 
+ */
+#feedback_in_modal {
+
+}
+/* New Article modal
+-------------------------------------------------------------- */
+#article_new_modal {
+  @extend .surpass_modal;
+
+  .orange_button {
+    display: block;
+    text-align: center;
+  }
+}
+
+/* New Workout modal
+-------------------------------------------------------------- */
+#workout_new_modal {
+  @extend .surpass_modal;
+
+  .controls-row {
+    margin-bottom: $gridGutterWidth;
+    
+    input {
+      margin-bottom: 0;
+    }
+
+    .orange_button {
+      margin-left: 10px;
+
+      &:first-child {
+        margin-left: 0;
+      }
+    }
+  }
+}

@@ -1,0 +1,1 @@
+$('#tab-content').html("<%= escape_javascript render(:file => 'users/notification_list', :formats => [:html]) %>");

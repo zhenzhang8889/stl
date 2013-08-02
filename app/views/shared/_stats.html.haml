@@ -1,0 +1,49 @@
+- @user ||= current_user
+#stats
+  .container
+    .row
+      .span4
+        %a{ :href => user_path(@user), :class => "user_picture" }
+          = profile_image_for @user, 70
+        %span.greeting
+          Howdy
+        %h1.username
+          = @user.name
+      / end .span4
+      %nav.span8
+        %ul
+          %li.network
+            %a{:href => "/users/network"}
+              %i.icon-group
+              %span.count
+                /= @user.followers.count
+              Network
+          / .network
+          %li.posts
+            %a{:href => discover_feeds_path}
+              %i.icon-file
+              %span.count
+                /= @user.posts.count
+              Discover
+          / .posts
+          %li.events
+            %a{:href => services_path, :class => ( on_path?("services", "index")?"selected":"") }    
+              %i.icon-calendar
+              %span.count
+                / = @user.events.count
+
+              Services
+          / .events
+          %li.shelves
+            %a{:href => stacks_path}
+              %i.icon-folder-open
+              %span.count
+                / = @user.events.count
+
+              Stacks
+          / .shelves
+        / end ul
+      / end .span8
+    / end .row
+  / end .container
+/ end #stats

@@ -1,0 +1,7 @@
+= simple_form_for(@goal) do |f|
+  = f.error_notification
+  .form-inputs
+    = f.label :goal
+    = f.text_field :name
+  .form-actions
+    = f.button :submit

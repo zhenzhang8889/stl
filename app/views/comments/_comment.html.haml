@@ -1,0 +1,19 @@
+- if comment 
+  %li.comment
+    .user_avatar
+      = link_to comment.user do
+        = profile_image_for(comment.user, 34)
+    .comment_body
+      %p= comment.content
+      %span.time_stamp
+        Posted on #{comment.created_at.strftime("%-d %b %Y")}
+      | By
+      = link_to comment.user.name, comment.user, title: comment.user.name, class: "user"
+    .comment_controls
+      - if signed_in?
+        %span{class: "like_comment_item_#{comment.id}"}
+          = link_to_like_comment(comment)
+        %a{:href => "#"}
+          %i.icon-ban-circle
+          Report offensive
+  / end .comment

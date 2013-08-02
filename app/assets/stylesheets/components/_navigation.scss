@@ -1,0 +1,383 @@
+/* --------------------------------------------------------------
+  Navigation
+-------------------------------------------------------------- */
+
+/* Footer navigation
+-------------------------------------------------------------- */
+#footer_nav {
+  color: $grayLighter;
+  font-size: 16px;
+
+  a {
+    color: $black;
+    text-transform: uppercase;
+    display: inline-block;
+    margin: 0 5px;
+  }
+}
+
+/* Stats
+-------------------------------------------------------------- */
+#stats {
+  @include background-image(linear-gradient(lighten($black, 2%), $black));
+
+  margin: 0;
+  padding: 0;
+  height: 110px;
+  color: $white;
+
+  .container {
+    position: relative;
+  }
+
+  .user_picture {
+    position: absolute;
+    top: 20px;
+    left: 0;
+
+    border: solid 3px $white;
+  }
+
+  .greeting {
+    position: absolute;
+    top: 30px;
+    left: 85px;
+    color: $gray;
+    font-size: 20px;
+  }
+
+  .username {
+    position: absolute;
+    top: 40px;
+    left: 85px;
+    font-weight: normal;
+    font-size: 30px;
+
+    &:before {
+      content: '';
+      display: inline-block;
+      border-left: 7px solid transparent;
+      border-right: 7px solid transparent;
+      border-top: 7px solid $black;
+      position: absolute;
+      bottom: -27px;
+      left: 9px;
+    }
+  }
+
+  nav {
+    ul {
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      border-right: solid 1px $gray;
+      float: left;
+
+      li {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: inline-block;
+        float: left;
+        width: 25%;
+
+        a {
+          @include box-sizing(border-box);
+          position: relative;
+          display: block;
+          width: 100%;
+          height: 110px;
+          padding: 70px 0 25px 25px;
+          font-size: 18px;
+          color: $white;
+          text-decoration: none;
+          background: $black;
+          border-left: solid 1px $gray;
+
+          [class^="icon-"], 
+          [class*=" icon-"] {
+            position: absolute;
+            top: 25px;
+            right: 15px;
+            font-size: 32px;
+            color: $gray;
+            @include opacity(.5);
+          }
+
+          &:hover, .active, &.selected {
+            background: $orange;
+          }
+
+          .count {
+            position: absolute;
+            top: 35px;
+            left: 25px;
+            display: block;
+            font-size: 30px;
+          }
+        }
+      }
+    }
+  }
+}
+
+/* User Stats
+-------------------------------------------------------------- */
+#user_stats {
+  margin: 0 0 $gridGutterWidth 0;
+
+  .avatar {
+    display: inline-block;
+    float: left;
+    margin: 0 $gridGutterWidth 0 0;
+
+    img {
+      border: solid 3px $white;
+    }
+  }
+
+  header {
+    position: relative;
+    margin: 0 0 25px 0;
+
+    h1 {
+      font-size: 18px;
+      line-height: 1em;
+      margin: 0;
+    }
+
+    p {
+      color: $grayLight;
+    }
+
+    .follow {
+      position: absolute;
+      top: 0;
+      right: 0;
+    }
+  }
+
+  footer {
+    ul {
+      margin: 0;
+      padding: 0;
+      background: $grayLighter;
+      @include border-radius(5px);
+      @include box-sizing(border-box);
+      overflow: hidden;
+
+      li {
+        margin: 0;
+        padding: 5px;
+        width: 20%;
+        display: inline-block;
+        float: left;
+        list-style: none;
+        @include box-sizing(border-box);
+
+        a {
+          display: block;
+          padding: 5px;
+          font-size: 16px;
+          color: $gray;
+          text-align: center;
+          border-left: solid 1px $grayLight;
+          @include box-sizing(border-box);
+
+          &:hover {
+            color: $linkColorHover;
+          }
+
+          strong {
+            color: $textColor;
+            display: block;
+            clear: both;
+          }
+        }
+
+        &:first-child {
+          a {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+
+/* User feed filter
+-------------------------------------------------------------- */
+#tab_content_filter {
+  margin-bottom: 20px;
+  .dropdown {
+    .multicheck {
+      [class^="icon-"], 
+      [class*=" icon-"] {
+        text-indent: -9999em;
+      }
+
+      &.checked {
+        [class^="icon-"], 
+        [class*=" icon-"] {
+        text-indent: 0;
+      }
+      }
+    }
+  }
+
+  .btn-group {
+    // position: absolute;
+    // top: 55px;
+    // right: $gridGutterWidth;
+
+    .active {
+      background: $orange;
+    }
+  }
+
+  .navbar-search {
+    // position: absolute;
+    // top: 36px;
+    // right: 190px;
+    margin-top:0;
+    margin-right:15px;
+  }
+
+  #new_stack_button {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+
+  .nav-tabs {
+    margin-bottom: 0;
+
+    .active {
+      a {
+        color: $white;
+        background: $black;
+      }
+    }
+
+    a {
+      @include border-radius(0);
+
+      padding: 10px $gridGutterWidth;
+      color: $white;
+      background: $orange;
+      border: none;
+    }
+  }
+
+  .tab-filter {
+    padding: $gridGutterWidth;
+    color: $white;
+    background: $black;
+    overflow: inherit;
+  }
+
+  .nav.nav-pills {
+    margin: 0;
+
+    li {
+      // position: relative;
+    }
+
+    .pills-text {
+      padding-right: $gridGutterWidth;
+      line-height: 32px;
+    }
+
+    a {
+      text-transform: uppercase;
+      color: $white;
+
+      &:hover, &:active {
+        color: $white;
+        background: $black;
+      }
+
+      .caret {
+        border-top-color: $white;
+        border-bottom-color: $white;        
+        margin-top: 4px;
+      }
+    }
+  }
+}
+
+#feed_content_tabs{
+  position: relative;
+  margin: $gridGutterWidth 0 0 0;
+
+  .nav-tabs {
+    margin-bottom: 0;
+
+    .active {
+      a {
+        color: $white;
+        background: $black;
+      }
+    }
+
+    a {
+      @include border-radius(0);
+
+      padding: 10px $gridGutterWidth;
+      color: $white;
+      background: $orange;
+      border: none;
+    }
+  }
+
+}
+
+/* Notifications
+-------------------------------------------------------------- */
+
+.notify_menu{
+  ul.dropdown-menu, ul.notification{
+    padding-top:20px;
+    min-width: 350px;
+    background-color: #f6f6f6;
+    max-height: 300px;
+    overflow-y: auto;
+    overflow-x: hidden;
+
+    a{
+      width:100%;
+      white-space: normal;
+      color: $orange;
+    }
+
+    li{
+      min-height:60px;
+      padding: 0 10px;
+    }
+
+    .timestamp{
+      text-align:right;
+      color: $grayLight;
+    }
+
+    .user{
+      width: 70px;
+      float:left;
+    }
+
+    .notification{
+      width:240px;
+      float:left;
+    }
+  }
+}
+
+
+/* Breadcrumbs
+-------------------------------------------------------------- */
+.breadcrumb {
+  margin: $gridGutterWidth 0;
+  padding: 0;
+  background: transparent;
+}

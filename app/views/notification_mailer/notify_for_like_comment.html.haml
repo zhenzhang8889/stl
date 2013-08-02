@@ -1,0 +1,4 @@
+%p #{@user.name},
+%p
+  = link_to polymorphic_url(@n.notifiable.likeable.commentable) do
+    = "#{@n.notifiable.user.name} liked a comment you made on a #{@n.notifiable.likeable.commentable.class.table_name.singularize}"

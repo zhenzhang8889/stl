@@ -1,0 +1,25 @@
+<% if @comment.errors.any? %>
+	<% # alert somehow? %>
+<% else %>
+	// clear form and append new comment to list
+	$(".comment_content_<%= @content.append_to_method %>").val('');
+	$(".cl_<%= @content.append_to_method %>").html('<%= j render(partial: "comments/feed_comment", as: :comment, collection: @content.comments) %>');
+	$(".comment_content_<%= @content.append_to_method %>").height($("#comment_content").height());
+
+	// if comments are collapsed, append the new comment above the comment form
+	if (!$(".cl_<%= @content.append_to_method %>").hasClass("in")) {
+	  $(".cl_last_<%= @content.append_to_method %>").html('<%= j render(:partial => "comments/feed_comment", :locals => { comment: @comment }) %>');
+	  $(".cl_last_<%= @content.append_to_method %>").show();
+	}
+
+	// reload count and display
+	<% @count = @content.reload %>
+	$(".comment_count_<%= @content.append_to_method %>").html("<%= j pluralize(@count.comments_count, 'comment') %>");
+
+	// reload isotope layout
+	$("#feed_list").isotope({
+	  transformsEnabled: false,
+	  itemSelector: ".item",
+	  layoutMode: "masonry"
+	});
+<% end %>

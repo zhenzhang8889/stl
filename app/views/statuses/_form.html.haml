@@ -1,0 +1,96 @@
+= simple_form_for @status, :remote => true, :html => {multipart: true, id: "status_form", class: "span8"} do |f|
+  / = render 'shared/error_messages', object: f.object
+
+  %p#link-loading{:style => "display:none;"}= image_tag "ajax-loader.gif"
+  %p#ajax_fetch_error{:style => "display:none"} There was an error and link could not be attached
+
+  = f.input :content, label: false, placeholder: "Got something on your mind?", input_html: { class: "input-block-level", style: "min-height:100px;", rows: 3 }
+  = f.hidden_field :attached_url_image, :value => ""
+  = f.hidden_field :attached_url, :value => ""
+  = f.hidden_field :attached_url_description, :value => ""
+  = f.hidden_field :attached_url_title, :value => ""
+
+  #upload_progress.panda_upload_progress
+  #upload_fields
+    = f.simple_fields_for :images, @status.images.build do |image_fields|
+      = image_fields.label "Upload Photo"
+      = image_fields.file_field :item, class: "uploadPic"
+
+  #external_link_content.alert.info.clearfix
+    .span3
+      %input{:type => "hidden", :name => "visible_image", :id => "visible_image"}
+      #url_image_choices
+      #atc_total_image_nav
+        %a#prev{:href => "#"}
+          %img{:src => "/assets/prev.png", :alt => "Prev", :border => "0"}
+        %a#next{:href => "#"}
+          %img{:src => "/assets/next.png", :alt => "Next", :border => "0"}
+      #atc_total_images_info
+        %span{:id => "visible_image_num"} 1
+        of
+        %span{:id => "image_choices_total"} 1
+      %br{:style => "clear:all"}
+      %p#check_no_thumb{:style => "margin-top:10px;"}
+        %label.checkbox
+          %input{:type => "checkbox"}
+            No Thumbnail
+    .span4
+      %p#link_title
+      %p#link_desc
+      %p#link_url
+    %a.close.clear-attached-link{"data-dismiss" => "alert", :href => "#"} ×
+    / end #external_link_content.alert.info.clearfix
+  #extraStatus.collapse
+    .row
+      .span8
+        = f.input :tag_list, label: false, input_html: { class: "input-block-level", style: "margin: 10px 0;" }, placeholder: "Add Tags"
+        #shareStatus.collapse
+          = f.input :share_list, label: false, input_html: { class: "input-block-level span7", style: "margin: 10px 0;" }, placeholder: "Share"
+          %span4
+            %p.social.pull-right
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook.connected{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+        #upload_progress_status.panda_upload_progress
+    .row
+      .span5
+        .links
+          %a.dev{ :href => "#"}
+            %i.icon-link
+            Share a link
+          | 
+          %a#uploadPhotoLink{ :href => "#"}
+            %i.icon-picture
+            %span.desc Add a photo
+          |
+          = link_to "#", data: { toggle: "collapse", target: "#statusVideoFooter" }, class: "addVideoStatusLink" do
+            %i.icon-facetime-video
+            Add a video
+          |
+          = link_to "#", data: { toggle: "collapse", target: "#shareStatus" }, class: "shareStatusLink" do
+            %i.icon-share
+            Share
+        / end .links
+      / end .span5
+      .span3
+        .pull-right= f.submit "Post", class: "btn btn-inverse pull-right", id: "status_submit"
+      / end.span3
+    / end .row
+    #statusVideoFooter.collapse
+      .row
+        - status_auth_params = Panda.signed_params('post', "/videos.json")
+        = content_tag "div", class: "status_video", data: { auth: status_auth_params } do
+          = f.simple_fields_for :videos, @status.videos.build do |builder|
+            = render "shared/upload_video", object: "status", builder: builder
+  / end #status_form.span8
+.span4
+  .actions
+    = link_to new_post_path, id: "article_new" do
+      %i.icon-file
+      Blog Post
+    |
+    = link_to mini_workout_modal_statuses_path, remote: true, data: { target: "#miniWorkoutModal", toggle: "modal" } do
+      %i.icon-certificate
+      Workout
+  / end .actions
+/ end .span4

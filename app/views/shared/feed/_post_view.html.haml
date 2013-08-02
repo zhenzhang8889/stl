@@ -1,0 +1,47 @@
+%li.item.span4
+  %section.box.blog_post
+    - if post.user == current_user
+      .options.pull-right{style: "display:none;"}
+        = link_to edit_post_path(post) do
+          %i.icon-edit
+        = link_to post, method: :delete, confirm: "are you sure?" do
+          %i.icon-trash
+    %header
+      .avatar        
+        = link_to post.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => post.user.name}} do
+          = profile_image_for(post.user, 34)
+      / end .avatar
+      - if signed_in?
+        = link_to post.user.name, post.user
+      - else
+        = post.user.name
+      .timestamp
+        = time_ago_in_words(post.created_at)
+      / end .timestamp
+    %h1
+      = link_to post.name, post
+    .media
+      - if post.has_videos?
+        - post.videos.each do |v|
+          = render "shared/video_display", v: v, h: 200, w: 325
+        %br
+      - if post.has_images?
+        - post.images.each do |i|
+          = render "shared/image_display", i: i
+
+
+    / end .media
+    = raw post.body
+    - if post.tags.present?
+      - post.tags.map(&:name).map do |t|
+        = link_to tags_feeds_path(tag: t), class: 'tag' do
+          %i.icon-tag
+          = t
+      / end tags
+    %footer
+      = render 'shared/feed/social_stats', feed: feed, content: post
+      = render 'shared/feed/social_actions', feed: feed, content: post
+
+    / post comments
+    = render 'shared/feed/comments_for_feed_item', feed: feed, content: post
+  / end .box.discussion

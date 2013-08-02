@@ -1,0 +1,17 @@
+%li
+  .avatar
+    = link_to user, {:rel => "tooltip", :data => { :placement => "right", :original_title => user.name}} do
+      = profile_image_for(user, 57) 
+    = user.name.split[0] if user.name
+  %p
+    %a{:href => "#"} #{pluralize(user.followers_count, "follower")}
+    |
+    %a{:href => "#"} #{user.followed_users.all.size} following
+    |
+    %a{:href => "#"} #{pluralize(user.feeds_count, "post")}
+  %p= user.tagline
+  %p
+    %span{class: "follow_link_#{user.id}"}
+      = link_to_follow_unfollow(user, style: "btn btn-warning btn-small")
+    = link_to compliment_modal_compliments_path(user_id: user.id), remote: true, data: { target: "#complimentModal", toggle: "modal" }, class: "btn btn-small btn-inverse" do
+      Compliment

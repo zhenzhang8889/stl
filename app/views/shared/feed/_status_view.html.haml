@@ -1,0 +1,45 @@
+%li.item.span4
+  %section.box.status
+    - if status.user == current_user
+      .options.pull-right{style: "display:none;"}
+        = link_to status, method: :delete, confirm: "are you sure?" do
+          %i.icon-trash
+    %header
+      .avatar
+        = link_to status.user, {:rel => "tooltip", :data => { :placement => "right", :original_title => status.user.name}} do
+          = profile_image_for(status.user, 34)
+      / end .avatar
+      - if signed_in?
+        = link_to status.user.name, status.user
+      - else
+        = status.user.name
+      .timestamp
+        = time_ago_in_words(status.created_at)
+      / end .timestamp
+    %h1= link_to status.content, status
+    .media
+      - if status.has_videos?
+        - status.videos.each do |v|
+          = render "shared/video_display", v: v, h: 200, w: 325
+        %br
+      - if status.has_images?
+        - status.images.each do |i|
+          = render "shared/image_display", i: i
+
+      - if status.has_attached_link?
+        = render 'statuses/status_attachment', status: status
+    / end .media
+
+    - if status.tags.present?
+      - status.tags.map(&:name).map do |t|
+        = link_to tags_feeds_path(tag: t), class: 'tag' do
+          %i.icon-tag
+          = t
+      / end tags
+    %footer
+      = render '/shared/feed/social_stats', feed: feed, content: status
+      = render '/shared/feed/social_actions', feed: feed, content: status
+
+    / status comments
+    = render '/shared/feed/comments_for_feed_item', feed: feed, content: status
+  / end .box.discussion

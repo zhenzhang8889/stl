@@ -1,0 +1,29 @@
+= render "shared/feed/filter"
+.row-fluid
+  .span6
+    .well
+      %legend Goals
+      = @user.goals
+  .span6
+    .well
+      %legend Interests
+      = @user.interest_list
+.row-fluid
+  .span6
+    .well
+      %legend Skills
+      = @user.skill_list
+  .span6
+    .well
+      %legend Bio
+      = simple_format h @user.bio
+.row-fluid
+  .span6
+    .well
+      %legend Contact
+      Location: #{@user.location}
+      %br
+      Email: #{@user.email}
+      - unless @user.website.blank?
+        %br
+        Website: #{@user.website}

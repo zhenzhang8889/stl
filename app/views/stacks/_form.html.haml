@@ -1,0 +1,15 @@
+= simple_form_for @stack, :html => { multipart: true } do |f|
+  = f.input :name, input_html: { class: "input-block-level" }
+  = f.input :description, input_html: { class: "input-block-level", rows: 3 }
+
+  - if @stack.image.present?
+    = image_tag(@stack.image.item.url(:thumb, false))
+    = f.simple_fields_for(:image) do |builder|
+      = builder.label "Add Image"
+      = builder.file_field :item
+  - else
+    = f.simple_fields_for(:image, @stack.build_image) do |builder|
+      = builder.label "Add Image"
+      = builder.file_field :item
+
+  = f.submit "Save", class: "btn btn-warning"

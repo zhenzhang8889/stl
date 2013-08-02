@@ -1,0 +1,1 @@
+$('#tab-content').html("<%= escape_javascript render(:partial  => 'sent_recipient', :formats => [:html]) %>");

@@ -1,0 +1,15 @@
+.notify_menu
+  %ul.notification.unstyled
+    %li
+      .user
+        .avatar
+          = link_to notification.notifier, {:rel => "tooltip", :data => { :placement => "left", :original_title => notification.notifier.name}} do
+            = profile_image_for(notification.notifier, 34)
+        / end .avatar
+        = link_to notification.notifier.name, notification.notifier
+      .notification
+        %p= send(notification.behaviour, notification)
+        .timestamp
+          = time_ago_in_words(notification.created_at)
+          ago
+        / end .timestamp

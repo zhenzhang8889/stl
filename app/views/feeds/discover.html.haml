@@ -1,0 +1,6 @@
+.container
+  #feed
+    = render 'shared/feed/tabs', :locals => { :user => @user }
+    #tab-content
+      = render template: "feeds/recommended"
+/ end .container

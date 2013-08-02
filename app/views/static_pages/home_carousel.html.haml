@@ -1,0 +1,164 @@
+- if current_user
+  = render 'users/home'
+- else
+  .wrapper
+    .container
+      .row
+        .span6
+          %section#headline
+            %h1.aim Aim
+            %h1.achieve Achieve
+            %h1.surpass Surpass
+            %p.lead Maecenas faucibus mollis interdum. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus. Donec sed odio dui. Cras justo odio, dapibus ac facilisis in, egestas eget quam.
+          / end #headline
+        / end .span6
+        .span6
+          %video#promo_video.video-js.vjs-default-skin{:controls => "", "data-setup" => "{}", :preload => "auto",}
+            %source{:src => "http://video-js.zencoder.com/oceans-clip.mp4", :type => "video/mp4"}/
+            %source{:src => "http://video-js.zencoder.com/oceans-clip.webm", :type => "video/webm"}/
+            %source{:src => "http://video-js.zencoder.com/oceans-clip.ogv", :type => "video/ogg"}/
+        / end .span6
+      / end .row
+      .row
+        .span3.pull-right
+          %section#goals_counter
+            %h1
+              3,666,453
+              %small Goals
+          / end #goals_counter
+        / end .span2.pull-right
+      / end .row
+    / end .container
+  / end .wraper
+  .container
+    .row
+      .span12
+        %form#fitness_goals_search{:action => "#", :method => "get"}
+          %h1 What is your fitness goal?
+          %i.icon-search
+          %input.goal_search{:type => "text", :placeholder => "I Want to Build Muscle Strength"}/
+          %a.btn.btn-inverse{:href => "/search_goal", "data-toggle" => "modal", "data-target" => "#fitness_goals_search_modal"} GO
+      #fitness_goals_search_modal.modal.hide.stl_modal
+        .modal-header
+          %h1.small_title
+            MY DREAM
+          %h2.title
+            I want to build muscle strength
+          %p You’re just one step away from connecting with the wider STL community of your peers, experts, and resources that will help you realize your dreams!
+        .modal-body
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam tempora dolore quaerat laborum eos eum qui ratione rerum recusandae reprehenderit est repudiandae nostrum ea officia voluptatem amet harum. Amet eaque!
+        .modal-footer
+          %a.pull-left{:href => "#"} Some other time
+    / end .row
+    #marketing.row
+      .span4
+        %section.meet_fitness_expert
+          %h1 Meet Fitness Expert
+          %p.lead Maecenas faucibus mollis interdum. Fusce dapi bus, tellus ac cursus commodo, tortor mauris condim entum nibh.
+        / end .meet_fitness_expert
+      / end .span4
+      .span4
+        %section.share_your_expertise
+          %h1 Share Your Expertise
+          %p.lead Maecenas faucibus mollis interdum. Fusce dapi bus, tellus ac cursus commodo, tortor mauris condim entum nibh.
+        / end .share_your_expertise
+      / end .span4
+      .span4
+        %section.motivate_your_friends
+          %h1 Motivate Your Friends
+          %p.lead Maecenas faucibus mollis interdum. Fusce dapi bus, tellus ac cursus commodo, tortor mauris condim entum nibh.
+        / end .motivate_your_friends
+      / end .span4
+    / end #marketing.row
+  / end .container
+  .wrapper
+    .container
+      #teaser.carousel.slide
+        .carousel-inner
+          .active.item.row
+            .span3
+
+              %section.box.dream
+                %h1 // Blog Post
+                %h2
+
+              %section.box.discussion
+                %h1
+
+
+              %section.box.discussion
+                %h1
+
+                  %a{ :href => "#" } I need to take control of my health!
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.discussion
+            / end .span3
+            .span3
+
+              %section.box.advice
+                %h1 // Status Update
+                %h2 Dreams won’t make you fitter. Staying Focused will!
+
+              %section.box.status
+                %h1 Dreams won’t make you fitter. Staying Focused will!
+
+              %section.box.status
+                %h1 Dreams won’t make you fitter. Staying Focused will!
+
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.status
+            / end .span3
+            .span3
+
+              %section.box.news
+                %h1 // Discussion
+                %h2 Should I take supplements?
+
+              %section.box.blog_post
+                %h1 532+ New User Registered
+
+              %section.box.blog_post
+                %h1 532+ New User Registered
+
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.blog_post
+            / end .span3
+            .span3
+
+              %section.box.dream
+                %h1 // Blog Post
+                %h2
+
+              %section.box.workout
+                %h1
+
+              %section.box.workout
+                %h1
+
+                  %a{ :href => "#" } How to burn your calories faster
+                %p.author
+                  %strong Ed Hardy,
+                  Chicago, IL
+                %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Laboriosam deserunt debitis itaque dignissimos quae officiis rem iste dolorum nisi!
+                %a.btn.btn-inverse{:href => "#"} Read more
+              / end .box.workout
+            / end .span3
+          / end .item
+        / end .carousel-inner
+        %a.carousel-control.left{"data-slide" => "prev", :href => "#teaser"} ‹
+        %a.carousel-control.right{"data-slide" => "next", :href => "#teaser"} ›
+      / end #teaser.carousel.slide
+    / end .container
+  / end .wrapper

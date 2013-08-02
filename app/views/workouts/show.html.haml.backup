@@ -1,0 +1,35 @@
+%p#notice= notice
+
+- if @workout.has_videos?
+  - @workout.videos.each do |v|
+    = render "shared/video_display", v: v
+
+- if @workout.has_images?
+  - @workout.images.each do |i|
+    = render "shared/image_display", i: i
+%p
+  %b Name:
+  = @workout.name
+%p
+  %b Description:
+  = @workout.description
+- if @workout.tags.present?
+  Tags:
+  = tag_links(@workout)
+      
+#vote_form
+  / = form_for Comment.new,:url => workout_comment_path(:id => @workout.id) do |f|
+  /   = f.text_area :content,:size => "3x3"
+  /   = f.submit"Comment"
+
+  / - if current_user && current_user.already_likes_workout?(@workout)
+  /   .like= link_to 'Unlike!', unlike_workout_path(id: @workout.id),:remote => true ,:class =>"btn btn-primary btn-mini"
+
+  / - else
+  /   .like= link_to 'Like!', like_workout_path(id: @workout.id),:remote => true ,:class =>"btn btn-primary btn-mini"
+
+= link_to 'Edit', edit_workout_path(@workout)
+|
+\#{link_to 'Back', workouts_path}
+- unless @workout.user == current_user
+  = render :partial => "thankings/form", :locals => { :user => @workout.user, :resource => @workout, :resource_thanking => @thanking }

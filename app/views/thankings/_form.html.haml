@@ -1,0 +1,7 @@
+= simple_form_for(resource_thanking) do |f|
+  = hidden_field_tag :user_id, user.id
+  = f.hidden_field :resource_class, value: resource.class.table_name.singularize.to_sym
+  = f.hidden_field :resource_id, value: resource.id
+  = f.hidden_field :thanker_id, value: current_user.id
+  = f.submit "Thank #{user.name} for this"
+  

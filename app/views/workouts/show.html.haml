@@ -1,0 +1,184 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span12
+      .page-header
+        %h1= @workout.name
+        %p.muted
+          by
+          = link_to @workout.user.name, @workout.user
+          \/  
+          = time_ago_in_words(@workout.created_at)
+          ago  
+          = likes_count_helper(@workout)
+          %a{:href => "#"}
+            %i.icon-comment
+            = pluralize(@workout.comments_count, "comment")
+          %p
+            - @workout.tags.map(&:name).map do |t|
+              = link_to tags_feeds_path(tag: t), class: 'tag' do
+                %i.icon-tag
+                = t
+      / end .page-header
+    / end .span12
+  / end .row
+  .row
+    .span8
+      .media
+        / %iframe{ :src => "http://www.youtube.com/embed/2rKvoLu5Isk", :frameborder => "0", :allowfullscreen => "true" }
+        - if @workout.has_videos?
+          - @workout.videos.each do |v|
+            = render "shared/video_display", v: v, h: 450, w: 770
+
+        - if @workout.has_images?
+          %center= image_tag @workout.images.first.item.url(:show, false)
+      / .media
+      %br
+      %section.box.blog_post.single
+        .page-header
+          = simple_format h @workout.description
+        / end .page-header
+      / end .box.blog_post.single
+      - if @workout.exercises.any?
+        %table.table.table-striped
+          %thead
+            %tr
+              %th #
+              %th.span7 Exercise Name
+              %th Reps
+              %th Weight
+          %tbody
+            - @workout.exercises.each do |e|
+              %tr
+                %td 1
+                %td= e.name
+                %td= e.reps
+                %td #{e.weight}lbs
+        / .table.table-striped
+      - if signed_in?
+        .btn-toolbar.pull-right
+          .btn-group
+            = link_to "Save", save_modal_stacks_path(c_id: @workout, c_type: @workout.type_name), remote: true, data: { target: "#saveToStackModal", toggle: "modal" }, class: "btn btn-warning"
+          .btn-group
+            %span{class: "like_workout_#{@workout.id}"}
+              = link_to_like_workout_show(@workout)
+           
+            = link_to send("share_modal_#{@workout.type_name.downcase.pluralize}_path", c_id: @workout, c_type: @workout.type_name), remote: true, data: { target: "#shareStackModal", toggle: "modal" }, class: "btn" do
+              %i.icon-share
+              Share
+        / end .btn-toolbar.pull-right
+      %hr
+      %section#comments
+        %h1 
+          Comments
+          %span.comments_count (#{@workout.comments_count})
+        - if signed_in?
+          = form_for current_user.comments.build, remote: true, html: { id: "comment_form"} do |c|
+            = c.text_area :content, placeholder: "Type Something Here", rows: 2, class: "span6"
+            = c.hidden_field :commentable_id, value: @workout.id
+            = c.hidden_field :commentable_type, value: 'Workout'
+            = c.submit "Post a comment", class: "btn btn-inverse btn-large pull-right"
+            %p.social.pull-left
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+          / end #comment_form
+        %ul.comment_list{class: "cl_#{@workout.feeds.first.id}"}
+          = render @comments
+        / end .comments_list
+      
+        = link_to "#", class: "btn btn-inverse btn-large", id: "more_workout_comments" do
+          %i.icon-plus
+          More
+        = will_paginate @comments, id: "workout_show_pagination", style: "display:none"
+      / end #comments
+    / end .span8
+    .span4
+      %section.box.related.updates
+        %ul.related_content_list
+          - unless @workout.related_content.present?
+            %li
+              %article
+                .content
+                  %h1 No related Content
+          - else
+            - @workout.related_content.limit(3).each do |r|
+              %li
+                %article
+                  - if r.has_images?
+                    .picture
+                      = link_to r do
+                        = image_tag r.images.first.item.url(:related, false)
+                  / end .picture
+                  .content
+                    %h1
+                      = link_to r.name, r
+                    %p= r.user.name
+                    %p= r.created_at.strftime("%e %b %Y")
+                  / end .content
+    .span4
+      .box.related.sponsored
+        %ul.related_content_list
+          %li
+            %article
+              .content
+                = ad_unit(:medium_rectangle, "ca-pub-4800925536943557", {:slot => "7324584599"})
+          / %li
+          /   %article
+          /     .picture
+          /       %a{:href => "#"}
+          /         %img{:alt => "", :src => "http://placehold.it/143x80"}/
+          /     / end .picture
+          /     .content
+          /       %h1
+          /         %a{:href => "#"} Run Away Training
+          /       %p Mike Lewis
+          /       %p 2 Sep 2012
+          /     / end .content
+          / %li
+          /   %article
+          /     .picture
+          /       %a{:href => "#"}
+          /         %img{:alt => "", :src => "http://placehold.it/143x80"}/
+          /     / end .picture
+          /     .content
+          /       %h1
+          /         %a{:href => "#"} Run Away Training
+          /       %p Mike Lewis
+          /       %p 2 Sep 2012
+          /     / end .content
+          / %li
+          /   %article
+          /     .picture
+          /       %a{:href => "#"}
+          /         %img{:alt => "", :src => "http://placehold.it/143x80"}/
+          /     / end .picture
+          /     .content
+          /       %h1
+          /         %a{:href => "#"} Run Away Training
+          /       %p Mike Lewis
+          /       %p 2 Sep 2012
+          /     / end .content
+          / %li
+          /   %article
+          /     .picture
+          /       %a{:href => "#"}
+          /         %img{:alt => "", :src => "http://placehold.it/143x80"}/
+          /     / end .picture
+          /     .content
+          /       %h1
+          /         %a{:href => "#"} Run Away Training
+          /       %p Mike Lewis
+          /       %p 2 Sep 2012
+          /     / end .content
+        / end .related_content_list
+      / .box.related.content
+    / end .span4
+  / end .row
+/ end .container

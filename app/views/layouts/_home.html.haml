@@ -1,0 +1,32 @@
+.container-fluid
+  .row-fluid
+    .span2
+      / Sidebar content
+      .bs-docs-example
+        %ul.nav.nav-pills.nav-stacked
+          %li.active
+            %a{:href => "/"}
+              %i.icon-home
+              Feed
+          %li
+            %a{:href => "workouts"}
+              %i.icon-book
+              Workouts
+          %li
+            %a{:href => "events"}
+              %i.icon-calendar
+              Events
+          %li
+            %a{:href => "groups"}
+              %i.icon-user
+              Groups
+    .span6
+      / Body content
+      %section
+        = render 'shared/status_form'
+      %section
+        %h3 Feed
+        = render 'shared/feed'
+    .span4
+      %section.right-sidebar
+        %p This is the recommended content

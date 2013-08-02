@@ -1,0 +1,67 @@
+
+=debug current_user.unread_message_count
+.noti
+  .noti-header 
+    = link_to "Compose", '#',  data: { target: "#compose_in_modal", toggle: "modal" }, class: "btn btn-small btn-inverse"
+    %h4 Your Messages 
+  .noti-body
+    .noti-left 
+      %form.noti-search{:action => ""}
+        %input.search-query.span3{:placeholder => "Search", :type => "text"}
+      %div#user_list.noti-left-body.btn-group.btn-group-vertical
+        - @users.each do |user|
+          - unless user == current_user            
+            = link_to  set_recipient_users_path(id: user.id), class: "btn btn-large", remote: true do
+              %i.icon-user
+                #{user.username}
+        
+        
+    .noti-right                            
+      .noti-right-up
+        %ul.nav.nav-tabs#sr
+          %li.active
+            %a{:href=>"#recieved", "data-toggle" => "tab" }Recieved
+          %li
+            %a{:href=>"#sent", "data-toggle" => "tab"}Sent
+            
+        .messagecontent.tab-content
+          #recieved.tab-pane.active
+            - @recieved_messages.each do |message|
+              .messagelist
+                .message_imagename
+                  .messageimage
+                    = link_to message.sender, {:rel => "tooltip", :data => { :placement => "right", :original_title => message.sender.name}} do
+                      = profile_image_for(message.sender, 34)
+                  .messagesendername
+                    = link_to message.sender.name, message.sender
+                .messagebodylist
+                  = message.body                                                                        
+                .messagetimestamp
+                  = time_ago_in_words( message.created_at )
+                .clearx
+                
+          #sent.tab-pane
+            - @sent_messages.each do |message|
+              .messagelist
+                .message_imagename
+                  .messageimage
+                    = link_to message.recipient, {:rel => "tooltip", :data => { :placement => "right", :original_title => message.recipient}} do
+                      = profile_image_for(message.recipient, 34)
+                  .messagesendername
+                    = link_to message.recipient.name, message.recipient
+                .messagebodylist
+                  = message.body
+                   
+                .messagetimestamp
+                  = time_ago_in_words( message.created_at )
+                .clearx
+            
+      .noti-right-down           
+        = form_tag send_message_users_path, :remote => true, :method => 'get', :id => "sending_frm" do              
+          %input{:type => 'hidden', :id => "recipient", :name => 'recipients', :value => "#{current_user.id}" }      
+          %input{:type => 'hidden', :name => 'subject', :placeholder => 'Name', :value => "New Message" }                 
+          %textarea.noti-message{ :rows => '5', :cols => '30', :name => 'body', :placeholder => 'Send any message'}
+          = submit_tag
+                  
+  .noti-footer       
+=render 'shared/modals/compose'    

@@ -1,0 +1,2 @@
+$(".thank_feed_item_<%= @thanking.resource_object.feeds.first.id %>").html(
+	"<%= j link_to_thank_feed(@thanking.resource_object) %>");

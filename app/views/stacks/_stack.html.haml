@@ -1,0 +1,38 @@
+%li.item.span4
+  %section.box.stack
+    %header
+      .avatar
+        = link_to stack.user, rel: "tooltip", data: { original_title: stack.user.name, placement: "right" } do
+          = profile_image_for(stack.user, 34)
+      / end .avatar
+      = link_to stack.user.name, stack.user
+      .timestamp
+        = time_ago_in_words(stack.created_at)
+      / end .timestamp
+    %h1= link_to stack.name, stack
+    .media
+      %center
+        - if stack.image
+          %center= image_tag stack.image.item.url(:stack, false)
+        - elsif stack.content_image
+          = image_tag stack.content_image.item.url(:stack, false)
+        - else
+          = image_tag "320x235.gif"
+    / end .media
+    %p= stack.description
+  
+    %footer
+      .social_stats
+        = pluralize(stack.stacked_items.count, "post")
+        |
+        = pluralize(stack.followers_count, "follower")
+      / end .social_stats
+      - if signed_in?
+        .social_actions
+          .pull-right
+            = link_to share_modal_stacks_path(c_id: stack, c_type: "Stack"), remote: true, data: { target: "#shareStackModal", toggle: "modal" } do
+              %i.icon-share
+              Share
+            %span{class: "follow_stack_#{stack.id}"}
+              = link_to_follow_stack(stack)
+        / end .social_actions

@@ -1,0 +1,4 @@
+$("#saveFade").hide();
+$("#saveFade p#link-loading").hide();
+$("#add_errors").show();
+$("#add_errors ul").append("<li><%= @stack.errors.full_messages.to_sentence %></li>");

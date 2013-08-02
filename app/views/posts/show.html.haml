@@ -1,0 +1,119 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span8
+      .media
+        - if @post.has_videos?
+          - @post.videos.each do |v|
+            = render "shared/video_display", v: v, h: 450, w: 770
+
+        - if @post.has_images?
+          %center= image_tag @post.images.first.item.url(:show, false)
+      %section.box.blog_post.single
+        .page-header
+          %h1= @post.name
+          %p.muted
+            By 
+            %strong= @post.user.name 
+            | Posted 
+            %strong
+              = @post.created_at.strftime("%B %-d, %Y %I:%M%P")
+
+            - if @post.tags.present?
+              - @post.tags.map(&:name).map do |t|
+                = link_to tags_feeds_path(tag: t), class: 'tag' do
+                  %i.icon-tag
+                  = t
+          
+
+          = raw @post.body
+        / end .page-header
+      / end .box.blog_post.single
+      .btn-toolbar.pull-left
+        .btn-group
+          = likes_count_helper(@post, style: "btn")
+          %a.btn{:href => "#"}
+            %i.icon-comments
+            = pluralize(@post.comments_count, "comment")
+        / end .btn-group
+      / .btn-toolbar.pull-left
+      - if signed_in?
+        .btn-toolbar.pull-right
+          .btn-group
+            = link_to "Save", save_modal_stacks_path(c_id: @post, c_type: @post.type_name), remote: true, data: { target: "#saveToStackModal", toggle: "modal"}, class: "btn btn-warning"
+          .btn-group
+            %span{class: "like_post_#{@post.id}"}
+              = link_to_like_post_show(@post)
+
+            = link_to send("share_modal_#{@post.type_name.downcase.pluralize}_path", c_id: @post, c_type: @post.type_name), remote: true, data: { target: "#shareStackModal", toggle: "modal" }, class: "btn" do
+              %i.icon-share
+              Share
+        / end .btn-toolbar.pull-right
+      %hr
+      %section#comments
+        %h1 
+          Comments
+          %span.comments_count (#{@post.comments_count})
+        - if signed_in?
+          = form_for current_user.comments.build, remote: true, html: { id: "comment_form"} do |c|
+            = c.text_area :content, placeholder: "Type Something Here", rows: 2, class: "span6"
+            = c.hidden_field :commentable_id, value: @post.id
+            = c.hidden_field :commentable_type, value: 'Post'
+            = c.submit "Post a comment", class: "btn btn-inverse btn-large pull-right"
+            %p.social.pull-left
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+          / end #comment_form
+        %ul.comment_list{class: "cl_#{@post.feeds.first.id}"}
+          = render @comments
+        / end .comments_list
+      
+        = link_to "#", class: "btn btn-inverse btn-large", id: "more_post_comments" do
+          %i.icon-plus
+          More
+        = will_paginate @comments, id: "post_show_pagination", style: "display:none"
+      / end #comments
+    / end .span8
+    .span4
+      .box.related.posts
+        %ul.related_content_list
+          - unless @post.related_content.present?
+            %li
+              %article
+                .content
+                  %h1 No related Content
+          - else
+            - @post.related_content.limit(3).each do |r|
+              %li
+                %article
+                  .content
+                    %h1
+                      = link_to r.name, r
+                    %p.leading= simple_format h truncate(r.body, length: 140)
+                    %p= r.user.name
+                    %p= r.created_at.strftime("%e %b %Y")
+
+
+                  / end .content
+    .span4
+      .box.related.sponsored
+        %ul.related_content_list
+          %li
+            %article
+              .content
+                = ad_unit(:medium_rectangle, "ca-pub-4800925536943557", {:slot => "7324584599"})
+        / end .related_content_list
+        / %a.btn.btn-inverse.btn-large{:href => "#"}
+        /   %i.icon-plus
+        /   More
+      / .box.related.content.posts
+    / end .span4
+  / end .row
+/ end .container

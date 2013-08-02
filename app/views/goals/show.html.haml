@@ -1,0 +1,7 @@
+%p#notice= notice
+%p
+  %b Goal:
+  = @goal.name
+= link_to 'Edit', edit_goal_path(@goal)
+|
+\#{link_to 'Back', goals_path}

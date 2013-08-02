@@ -1,0 +1,4 @@
+= render 'shared/feed/filter', type: :recommended
+#feed_contents= render "feed_results", items: @feed_items  
+- if @feed_items.count < 1
+  %h3 To See recommended items, #{link_to "add some interests.", settings_users_path(current_user)}

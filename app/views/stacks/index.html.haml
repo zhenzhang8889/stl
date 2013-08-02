@@ -1,0 +1,11 @@
+.container
+  #feed
+    = render 'shared/feed/tabs'
+    #tab-content
+      - if signed_in?
+        = render template: "stacks/following"
+      - else
+        = render template: "stacks/popular"
+    
+  / end #feed
+/ end .container

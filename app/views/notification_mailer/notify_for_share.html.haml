@@ -1,0 +1,4 @@
+%p #{@user.name},
+%p
+  = link_to polymorphic_path(@n.notifiable) do
+    = "#{@n.notifiable.user.name} just shared a #{@n.notifiable.class.table_name.singularize} with you"

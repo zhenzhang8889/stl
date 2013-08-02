@@ -1,0 +1,40 @@
+.container
+  .row
+    .span12
+      %ul.breadcrumb
+
+      / end .breadcrumb
+    / .span12
+  / end .row
+  .row
+    .span12
+      .box.follow
+        %ul
+          - @users.each do |user|
+            %li
+              .avatar
+                = link_to user, {:rel => "tooltip", :data => { :placement => "right", :original_title => user.name}} do
+                  = profile_image_for(user, 57) 
+                = user.name.split[0]
+              %p
+                %a{:href => "#"} 30 Followers 
+                |
+                %a{:href => "#"} 10 following
+                |
+                %a{:href => "#"} 15 Posts
+              %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Rem voluptatibus error dolor provident perspiciatis et dignissimos aliquid itaque.
+              %p
+                %a.btn.btn-small.btn-warning{:href => "#"} Follow
+  / end .row
+  .row
+    .span12
+      %p 
+      %a.btn.pull-left{ href: "#"}
+        %i.icon-circle-arrow-left
+        Previous
+      %a.btn.pull-right{ href: "#"}
+        Next
+        %i.icon-circle-arrow-right
+    / end .span12
+  / end .row
+/ end .container

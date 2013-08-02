@@ -1,0 +1,63 @@
+/* --------------------------------------------------------------
+  Typography
+-------------------------------------------------------------- */
+$fontAwesomePath: "fontawesome-webfont" !default;
+
+@include font-face(
+    'FontAwesome',
+    font-files(
+        "#{$fontAwesomePath}.woff", woff,
+        "#{$fontAwesomePath}.ttf", truetype,
+        "#{$fontAwesomePath}.svg#FontAwesomeRegular", svg),
+        '#{$fontAwesomePath}.eot',
+    normal,
+    normal);
+
+@include font-face(
+    'Proxima Nova',
+    font-files(
+        "ProximaNova.woff", woff,
+        "ProximaNova.ttf", truetype,
+        "ProximaNova.svg#FontAwesomeRegular", svg),
+        'ProximaNova.eot',
+    normal,
+    normal);
+
+
+/*
+  Headers
+-------------------------------------------------------------- */
+.page-header {
+  margin: 0 0 10px 0;
+}
+
+/*
+  Links
+-------------------------------------------------------------- */
+a {
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: none !important;
+  }
+}
+
+/*
+  Misc
+-------------------------------------------------------------- */
+iframe {
+  margin: 0;
+  padding: 0;
+  border: none;
+  width: 100%;
+  min-height: 450px;
+}
+
+hr {
+  display: block;
+  clear: both;
+}
+
+.center {
+  text-align: center;
+}

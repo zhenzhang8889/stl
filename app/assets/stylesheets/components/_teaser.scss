@@ -1,0 +1,26 @@
+/* --------------------------------------------------------------
+  Teaser
+-------------------------------------------------------------- */
+
+#teaser {
+  .carousel-control {
+    @include border-radius(0);
+    @include opacity(0.8);
+    background: $orange;
+    border: none;
+
+    &.left {
+      left: -60px;
+    }
+
+    &.right {
+      right: -60px;
+    }
+  }
+
+  .box {
+    .btn.btn-inverse {
+      color: $white !important;
+    }
+  }
+}

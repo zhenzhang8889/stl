@@ -1,0 +1,7 @@
+= simple_form_for(@spec) do |f|
+  = render 'shared/error_messages', object: f.object
+  = f.input :roles
+  = f.input :interests
+  = f.input :goals
+  = f.input :bio
+  = f.submit "Save changes", class: "btn btn-large btn-primary"

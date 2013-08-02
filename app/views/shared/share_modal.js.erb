@@ -1,0 +1,19 @@
+$('#shareStackModal .modal-body').html("<%= escape_javascript render(:partial => 'shared/share_modal_dynamic', :locals => { :content => @content }) %>");
+$("#shareStackModal #<%= @content.low_type_name %>_share_list").tagit({
+  placeholderText: "Share by username or email"
+});
+
+$("form").on("click", ".submit_share", function(e) {
+  $("#shareStackModal #saveFade").show();
+  $("#shareStackModal #saveFade p#link-loading").show();
+  $("#shareStackModal #saveFade #success").hide();
+  $("#shareStackModal #add_errors ul").empty();
+  $("#shareStackModal #add_errors").hide();
+});
+
+$('#shareStackModal').on('hidden', function () {
+  $("#shareStackModal #saveFade").hide();
+  $("#shareStackModal #saveFade p#link-loading").hide();
+  $("#shareStackModal #saveFade #success").hide();
+  $('#shareStackModal .modal-body').empty();
+});

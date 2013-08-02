@@ -1,0 +1,10 @@
+= render "shared/feed/filter"
+.row-fluid
+  .span2
+    #filter_network.btn-group.btn-group-vertical
+      = link_to "All", sort_network_users_path(topic: :all), class: "btn btn-large active", remote: true
+      - User::NETWORK_FILTER.each do |f|
+        = link_to f, sort_network_users_path(topic: f), class: "btn btn-large", remote: true
+  .span10
+    .row-fluid#network_members
+      = render "network_member", members: @network

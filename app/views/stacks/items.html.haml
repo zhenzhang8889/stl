@@ -1,0 +1,4 @@
+= render 'shared/feed/filter', :locals => { :user => @user}
+%ol#feed_list.container
+  = render partial: "item", as: :item, collection: @items
+/ end #feed_list.container

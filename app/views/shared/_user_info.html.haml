@@ -1,0 +1,11 @@
+#user_info.navbar.navbar-static-top
+  %a{:href => user_path(current_user)}
+    = profile_image_for current_user, 52
+  %h1
+    = current_user.name
+  %span
+    = pluralize(current_user.workouts.count, "Workouts")
+  %span
+    = pluralize(current_user.followers.count, "Network")
+  / %span
+  /   = pluralize(current_user.events.count, "Events")

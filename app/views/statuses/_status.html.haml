@@ -1,0 +1,13 @@
+%li
+  .micropost
+    %span.content= status.content
+    %p= status.created_at
+    
+
+
+    %span.timestamp
+      Posted #{time_ago_in_words(status.created_at)} ago.
+    - if @user.statuses.any?
+      = link_to "delete", status, method: :delete, |
+        data: { confirm: "You sure?" },            |
+        title: status.content                      |

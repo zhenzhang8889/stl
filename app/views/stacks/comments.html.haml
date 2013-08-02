@@ -1,0 +1,28 @@
+= render 'shared/feed/filter', :locals => { :user => @user}
+.container
+  .row
+    .span8
+      %section#comments
+        %h1 
+          Comments
+          %span.comments_count (#{@stack.comments_count})
+        - if signed_in?
+          = form_for current_user.comments.build, remote: true, html: { id: "comment_form"} do |c|
+            = c.text_area :content, placeholder: "Type Something Here", rows: 2, class: "span6"
+            = c.hidden_field :commentable_id, value: @stack.id
+            = c.hidden_field :commentable_type, value: 'Stack'
+            = c.submit "Post a comment", class: "btn btn-inverse btn-large pull-right"
+            %p.social.pull-left
+              %a.dev.google{ :href => "#" } Google
+              %a.dev.facebook{ :href => "#" } Facebook
+              %a.dev.twitter{ :href => "#" } Twitter
+          / end #comment_form
+        %ul.comment_list{class: "cl_#{@stack.id}"}
+          = render @comments
+        / end .comments_list
+      
+        = link_to "#", class: "btn btn-inverse btn-large", id: "more_stack_comments" do
+          %i.icon-plus
+          More
+        = will_paginate @comments, id: "stack_show_pagination", style: "display:none"
+      / end #comments

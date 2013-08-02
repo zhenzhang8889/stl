@@ -1,0 +1,22 @@
+- provide(:title, @title)
+.row
+  %aside.span4
+    %section
+      = profile_image_for @user, 52
+      %h1= @user.name
+      %span= link_to "view my profile", @user
+      %span
+        %b Statuses:
+        = @user.statuses.count
+    %section
+      = render 'shared/stats'
+      - if @users.any?
+        .user_avatars
+          - @users.each do |user|
+            = link_to profile_image_for(user, 30), user
+  .span8
+    %h3= @title
+    - if @users.any?
+      %ul.users
+        = render @users
+      = will_paginate

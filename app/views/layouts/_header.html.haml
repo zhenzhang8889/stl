@@ -1,0 +1,51 @@
+%header#header.navbar.navbar-fixed-top.navbar-inverse
+  .navbar-inner
+    .container
+      %h1#logo
+        = link_to "Surpass the Limit", root_path
+      %nav
+        %ul.nav.pull-right{:id => "headerlist"}
+          - if current_user
+            %li.pull-left
+              %form.navbar-search{:action => ""}
+                %input.search-query.span3{:placeholder => "Search for questions, workouts, people", :type => "text"}
+            
+            %li.dropdown
+              %a.dropdown-toggle{"data-toggle" => "dropdown", :href => "#user"}
+                = current_user.name
+                %b.caret
+              %ul.dropdown-menu
+                %li= link_to "Profile", current_user
+                %li= link_to "Settings", settings_users_path(current_user)
+                %li= link_to "Sign out", destroy_user_session_path, method: "delete"
+                
+            / end user menu
+
+            = # REFACTOR: messy messy
+           
+            %li.dropdown
+              %ul.dropdown-menu
+                %li= link_to "Notifications", notification_path 
+              - @ns = current_user.notifications.unviewed.for_site
+              %a.dropdown-toggle.notify_count_menu{"data-toggle" => "dropdown", :href => "#notifications"}
+                = @ns.count
+              - if @ns.present?
+                = content_tag "ul", class: "dropdown-menu notify_ids", data: {ids: @ns.map(&:id)} do
+                  - @ns.each do |n|
+                    - # call correct story helper
+                    %li= send(n.behaviour, n)
+            
+            %li.message
+              %a.dropdown-toggle.notify_count_menu{"data-toggle" => "dropdown", :href => "#messages" , :id => "messagelist", :class => ( on_path?("users", "messages")?"msgbox":"")}
+              %ul.dropdown-menu
+                %li= link_to "Messages", messages_users_path 
+              %li.messagecount
+                %i.icon-envelope
+                - if unread > 0
+                  %input.messagemiscount{value: unread}
+                     
+          - else
+            %li= link_to "How it works", "#"
+            %li= link_to "Community", "#"
+            %li= link_to "Our Blog", "#"
+            %li= link_to "Sign in", "#sign_in_modal", id: "sign_in_link"

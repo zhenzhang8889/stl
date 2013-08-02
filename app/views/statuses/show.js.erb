@@ -1,0 +1,8 @@
+$('.comment_list').append('<%= j render(@comments) %>');
+<% if @comments.next_page %>
+  $('.pagination').replaceWith('<%= j will_paginate(@comments) %>');
+  $(".pagination").css("display", "none")
+<% else %>
+  $(".pagination ul > li:last-child > a").attr("href", "")
+  $("#more_status_comments").attr("disabled", true)
+<% end %>
